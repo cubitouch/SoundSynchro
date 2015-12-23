@@ -195,3 +195,6 @@ FakesAssemblies/
 # Visual Studio 6 workspace options file
 *.opt
 SoundSynchro.Model/SoundSynchro.build.xml
+
+# Application uploads
+SoundSynchro.Server/uploads
