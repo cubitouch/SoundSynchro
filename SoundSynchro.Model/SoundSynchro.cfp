@@ -1,0 +1,24 @@
+﻿<cf:project defaultNamespace="SoundSynchro" xmlns:cf="http://www.softfluent.com/codefluent/2005/1" xmlns:cfx="http://www.softfluent.com/codefluent/modeler/2008/1" xmlns:cfom="http://www.softfluent.com/codefluent/producers.model/2005/1" xmlns:cfps="http://www.softfluent.com/codefluent/producers.sqlserver/2005/1" xmlns:cfaz="http://www.softfluent.com/codefluent/producers.sqlazure/2011/1" createDefaultMethodForms="true" createDefaultApplication="false" createDefaultHints="false">
+  <cf:import path="Default.Surface.cfp" />
+  <cf:import path="SQLAzure.cfp" overwrite="false" />
+  <cf:producer name="Business Object Model (BOM)" typeName="CodeFluent.Producers.CodeDom.CodeDomProducer, CodeFluent.Producers.CodeDom">
+    <cf:configuration compileWithVisualStudio="true" compile="false" codeDomProviderTypeName="CSharp" targetDirectory="..\SoundSynchro" cfx:targetProject="..\SoundSynchro\SoundSynchro.csproj" cfx:targetProjectLayout="Update" />
+  </cf:producer>
+  <cf:producer name="SQL Server" typeName="CodeFluent.Producers.SqlServer.SqlServerProducer, CodeFluent.Producers.SqlServer">
+    <cf:configuration produceViews="true" connectionString="Server=SF114;Database=SoundSynchro;Integrated Security=true;Application Name=SoundSynchro" targetDirectory="..\SoundSynchro\Persistence" cfx:targetProject="..\SoundSynchro\SoundSynchro.csproj" cfx:targetProjectLayout="Update, DontRemove" />
+  </cf:producer>
+  <cf:entity name="Music" namespace="SoundSynchro" categoryPath="/SoundSynchro">
+    <cf:property name="id" key="true" />
+    <cf:property name="title" />
+    <cf:property name="file" />
+    <cf:property name="thumbnail" />
+    <cf:property name="date" typeName="datetime" />
+    <cf:method name="SearchAll" body="LOAD(string s)&#xD;&#xA;WHERE title LIKE ['%%'+@s+'%%']" checkLevel="None" />
+  </cf:entity>
+  <cf:entity name="Playlist" namespace="SoundSynchro">
+    <cf:property name="id" key="true" />
+    <cf:property name="date" typeName="datetime" />
+    <cf:property name="title" />
+    <cf:property name="musics" typeName="{0}.MusicCollection" />
+  </cf:entity>
+</cf:project>

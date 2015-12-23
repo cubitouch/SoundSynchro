@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Storage";
+}
+
+<h2>Storage</h2>
+<hr />
+@using (Html.BeginForm("Storage", "Home", FormMethod.Post, new { @class = "form", enctype = "multipart/form-data" }))
+{
+    <div class="form-group">
+        <label for="audio">Music</label>
+        <input type="file" name="audio" id="audio" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="audio">Thumbnail</label>
+        <input type="file" name="thumbnail" id="thumbnail" class="form-control" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Upload" class="btn btn-default" />
+    </div>
+}
+@using (Html.BeginForm("StorageMultiple", "Home", FormMethod.Post, new { @class = "form", enctype = "multipart/form-data" }))
+{
+    <div class="form-group">
+        <label for="audio">Music and thumbnails</label>
+        <input type="file" name="files" id="files" class="form-control" multiple />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Upload" class="btn btn-default" />
+    </div>
+}

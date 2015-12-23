@@ -1,0 +1,5 @@
+﻿<cf:project defaultNamespace="SoundSynchro" xmlns:cf="http://www.softfluent.com/codefluent/2005/1">
+  <cf:producer name="SQL Azure" typeName="CodeFluent.Producers.SqlServer.SqlAzureProducer, CodeFluent.Producers.SqlServer">
+    <cf:configuration localConnectionString="" targetDirectory="..\SoundSynchro\Persistence" d3p1:targetProject="..\SoundSynchro\SoundSynchro.csproj" d3p1:targetProjectLayout="Update, DontRemove" xmlns:d3p1="http://www.softfluent.com/codefluent/modeler/2008/1" />
+  </cf:producer>
+</cf:project>

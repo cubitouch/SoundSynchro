@@ -1,0 +1,19 @@
+﻿@using SoundSynchro
+@model MusicCollection
+<h2>
+    Musics
+    <div class="pull-right">
+        <a id="play-all" href="#" class="btn btn-success">Play all</a>
+    </div>
+</h2>
+
+@foreach (Music music in Model)
+{
+    <div class="music-item img-thumbnail col-sm-4 text-center" data-id="@music.id" data-title="@music.title" data-audio="@music.AudioUrl" data-thumbnail="@music.ThumbnailUrl">
+        <img src="@music.ThumbnailUrl" /><br />
+        <span class="music-title">@music.title</span><br />
+        <a class="play-button btn btn-default" href="#"><i class="glyphicon glyphicon-play"></i></a>
+        <a class="edit-button btn btn-default" href="#"><i class="glyphicon glyphicon-edit"></i></a>
+        <a class="add-button btn btn-default" href="#"><i class="glyphicon glyphicon-plus"></i></a>
+    </div>
+}

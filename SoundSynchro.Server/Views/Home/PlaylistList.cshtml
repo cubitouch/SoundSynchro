@@ -1,0 +1,10 @@
+﻿@using SoundSynchro
+@model PlaylistCollection
+<h2>
+    Playlists
+</h2>
+
+@foreach (Playlist playlist in Model)
+{
+    @Html.Partial("PlaylistItem",playlist)
+}
