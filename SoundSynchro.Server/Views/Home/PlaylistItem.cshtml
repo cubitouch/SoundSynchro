@@ -2,70 +2,67 @@
 @model Playlist
 @if (Model != null)
 {
-    <div class="playlist-item img-thumbnail col-sm-4 text-center" data-id="@Model.id">
-        <img src="@Model.musics.First().ThumbnailUrl" /><br />
-        <span class="playlist-title">@Model.title</span><br />
-        <a class="view-playlist-button btn btn-default" data-toggle="modal" data-target="playlist-view-@Model.id" href="#"><i class="glyphicon glyphicon-th"></i></a>
-        <a class="play-playlist-button btn btn-default" href="#"><i class="glyphicon glyphicon-play"></i></a>
-        <a class="edit-playlist-button btn btn-default" data-toggle="modal" data-target="playlist-edit-@Model.id" href="#"><i class="glyphicon glyphicon-edit"></i></a>
-        <div id="playlist-view-@Model.id" class="modal fade" tabindex="-1" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Playlist content</h4>
-                    </div>
-                    <div class="modal-body">
-                        <table class="table">
-                            <tbody>
-                                @foreach (Music music in @Model.musics)
-                                {
-                                    <tr>
-                                        <td>@music.title</td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
+    <div class="media-object playlist-item columns small-4 text-center" data-id="@Model.id">
+        <div class="media-object-section">
+            <div class="thumbnail">
+                <img src="@Model.musics.First().ThumbnailUrl" />
+            </div>
+        </div>
+        <div class="media-object-section">
+            <h6 class="music-title">@Model.title</h6>
+            <p>
+                <a class="view-playlist-button button" data-open="playlist-view-@Model.id" href="#"><i class="fa fa-th"></i></a>
+                <a class="play-playlist-button button" href="#"><i class="fa fa-play"></i></a>
+                <a class="edit-playlist-button button" data-open="playlist-edit-@Model.id" href="#"><i class="fa fa-edit"></i></a>
+            </p>
+        </div>
+        <div id="playlist-view-@Model.id" class="reveal" data-reveal>
+            <h3>Playlist content</h3>
+            <table class="table">
+                <tbody>
+                    @foreach (Music music in @Model.musics)
+                    {
+                        <tr>
+                            <td>@music.title</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
 
-                    </div>
-                    <div class="modal-footer">
-                        <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
-                    </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
-        <div id="playlist-edit-@Model.id" data-id="@Model.id" class="playlist-edit-modal modal fade" tabindex="-1" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Playlist editor</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="playlistTitle">Title</label>
-                            <input class="playlistTitle form-control" name="playlistTitle" value="@Model.title" />
-                        </div>
-                        <table class="table">
-                            <tbody>
-                                @foreach (Music music in @Model.musics)
-                                {
-                                    <tr>
-                                        <td>@music.title</td>
-                                        <td><input type="checkbox" checked data-id="@music.id" /></td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
+            <button class="close-button" data-close aria-label="Close reveal" type="button">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
 
+        <div id="playlist-edit-@Model.id" data-id="@Model.id" class="reveal playlist-edit-modal" data-reveal>
+            <h3>Playlist editor</h3>
+            <p>
+                <div class="row">
+                    <div class="columns small-12">
+                        <label>
+                            Title
+                            <input class="playlistTitle" name="playlistTitle" value="@Model.title" type="text" />
+                        </label>
                     </div>
-                    <div class="modal-footer">
-                        <a href="#" class="btn btn-primary playlist-edit-save">Save changes</a>
-                        <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
-                    </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
+                </div>
+                <table class="table">
+                    <tbody>
+                        @foreach (Music music in @Model.musics)
+                        {
+                            <tr>
+                                <td>@music.title</td>
+                                <td><input type="checkbox" checked data-id="@music.id" /></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </p>
 
+            <a href="#" class="button secondary" data-close aria-label="Close reveal">Close</a>
+            <a href="#" class="button playlist-edit-save">Save changes</a>
+            <button class="close-button" data-close aria-label="Close reveal" type="button">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
     </div>
 }

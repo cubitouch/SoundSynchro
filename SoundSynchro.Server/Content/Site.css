@@ -4,10 +4,10 @@
 }
 
 /* Set padding to keep content from hitting the edges */
-.body-content {
+/*.body-content {
     padding-left: 15px;
     padding-right: 15px;
-}
+}*/
 
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
@@ -31,5 +31,29 @@ textarea {
     overflow: hidden;
     display: inline-block;
     width: 100%;
-    height: 20px;
+    height: 24px;
+}
+
+
+.tabs-title.active a {
+    background: #2199e8;
+    color: #fff;
+}
+
+.media-object {
+    padding-top: 10px;
+}
+
+    .media-object.active {
+        background: #2199e8;
+        color: #fff;
+    }
+
+.thumbnail img {
+    width: 120px;
+    height: 90px;
+}
+
+.table{
+    width:100%;
 }

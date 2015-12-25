@@ -3,17 +3,26 @@
 <h2>
     Musics
     <div class="pull-right">
-        <a id="play-all" href="#" class="btn btn-success">Play all</a>
+        <a id="play-all" href="#" class="button"><i class="fa fa-play-circle"></i> Play all</a>
     </div>
 </h2>
-
-@foreach (Music music in Model)
-{
-    <div class="music-item img-thumbnail col-sm-4 text-center" data-id="@music.id" data-title="@music.title" data-audio="@music.AudioUrl" data-thumbnail="@music.ThumbnailUrl">
-        <img src="@music.ThumbnailUrl" /><br />
-        <span class="music-title">@music.title</span><br />
-        <a class="play-button btn btn-default" href="#"><i class="glyphicon glyphicon-play"></i></a>
-        <a class="edit-button btn btn-default" href="#"><i class="glyphicon glyphicon-edit"></i></a>
-        <a class="add-button btn btn-default" href="#"><i class="glyphicon glyphicon-plus"></i></a>
-    </div>
-}
+<div class="row">
+    @foreach (Music music in Model)
+    {
+        <div class="media-object music-item columns small-4 text-center @(music==Model.Last()?"end":"")" data-id="@music.id" data-title="@music.title" data-audio="@music.AudioUrl" data-thumbnail="@music.ThumbnailUrl">
+            <div class="media-object-section">
+                <div class="thumbnail">
+                    <img src="@music.ThumbnailUrl" />
+                </div>
+            </div>
+            <div class="media-object-section">
+                <h6 class="music-title">@music.title</h6>
+                <p>
+                    <a class="play-button button" href="#"><i class="fa fa-play"></i></a>
+                    <a class="edit-button button" href="#"><i class="fa fa-edit"></i></a>
+                    <a class="add-button button" href="#"><i class="fa fa-plus"></i></a>
+                </p>
+            </div>
+        </div>
+    }
+</div>

@@ -13,8 +13,6 @@ namespace SoundSynchro.Server
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            // instruct Mvc to ignore all blob handler requests, from any path
-            routes.IgnoreRoute("{*blobhandler}", new { blobhandler = new BlobHandlerRouteConstraint() });
             routes.IgnoreRoute("uploads");
 
             routes.MapRoute(
