@@ -10,7 +10,7 @@
 <body>
     <div class="body-content">
         <div class="row expanded">
-            <div class="small-4 columns">
+            <div class="small-6 medium-5 large-3 columns">
                 <ul id="sidemenu" class="tabs vertical ">
                     <li class="tabs-title active">
                         <a href="@Url.Action( "MusicList", "Home")"><i class="fa fa-home"></i> Home</a>
@@ -35,24 +35,29 @@
 
                 <hr />
                 <div class="row">
-
                     <div id="player" class="media-object music-item columns small-12 text-center">
-                        <div class="media-object-section">
-                            <div class="thumbnail">
-                                <img src="#" />
-                            </div>
+                        <div class="thumbnail">
+                            <img src="#" />
                         </div>
-                        <div class="media-object-section">
-                            <h6 class="title music-title"></h6>
-                            <p>
-                                <audio class="audio" controls>
-                                    <source src="#" type="audio/mpeg" />
-                                </audio><br />
-                            </p>
+
+                        <h6 class="title music-title"></h6>
+                        <span id="player-duration-begin" class="label float-left">00:00</span>
+                        <span id="player-duration-end" class="label float-right">00:00</span>
+                        <div class="slider" data-slider data-initial-start="0">
+                            <span class="slider-handle" data-slider-handle role="slider" tabindex="1" aria-controls="player-duration-current"></span>
+                            <span class="slider-fill" data-slider-fill></span>
+                            <input type="hidden" id="player-duration-current" />
                         </div>
+                        <div class="tiny button-group">
+                            <a href="#" id="player-play" class="button"><i class="fa fa-pause"></i></a>
+                            <a href="#" id="player-volume" class="button"><i class="fa fa-volume-up"></i></a>
+                        </div>
+                        <audio class="audio hide" controls>
+                            <source src="#" type="audio/mpeg" />
+                        </audio>
                     </div>
-                    <div class="columns small-12">
-                        <div class="small button-group">
+                    <div class="columns small-12 text-center">
+                        <div class="tiny button-group">
                             <a href="#" id="player-previous" class="button"><i class="fa fa-backward"></i></a>
                             <a href="#" id="player-save-playlist" class="button"><i class="fa fa-save"></i></a>
                             <a href="#" id="player-next" class="button"><i class="fa fa-forward"></i></a>
@@ -61,7 +66,7 @@
                     </div>
                 </div>
             </div>
-            <div id="content" class="small-8 columns">
+            <div id="content" class="small-6 medium-7 large-9 columns">
                 @RenderBody()
             </div>
         </div>

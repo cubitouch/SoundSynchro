@@ -2,7 +2,7 @@
 @model Playlist
 @if (Model != null)
 {
-    <div class="media-object playlist-item columns small-4 text-center" data-id="@Model.id">
+    <div class="media-object playlist-item columns small-12 medium-6 large-4 text-center" data-id="@Model.id">
         <div class="media-object-section">
             <div class="thumbnail">
                 <img src="@Model.musics.First().ThumbnailUrl" />
@@ -10,11 +10,11 @@
         </div>
         <div class="media-object-section">
             <h6 class="music-title">@Model.title</h6>
-            <p>
+            <div class="tiny button-group">
                 <a class="view-playlist-button button" data-open="playlist-view-@Model.id" href="#"><i class="fa fa-th"></i></a>
                 <a class="play-playlist-button button" href="#"><i class="fa fa-play"></i></a>
                 <a class="edit-playlist-button button" data-open="playlist-edit-@Model.id" href="#"><i class="fa fa-edit"></i></a>
-            </p>
+            </div>
         </div>
         <div id="playlist-view-@Model.id" class="reveal" data-reveal>
             <h3>Playlist content</h3>

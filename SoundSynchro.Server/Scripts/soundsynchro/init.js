@@ -46,11 +46,6 @@
         return false;
     });
 
-    $('#player .audio')[0].addEventListener("ended", function () {
-        playNext();
-    }, true);
-    $('#player-previous').click(function () { playPrevious(); });
-    $('#player-next').click(function () { playNext(); });
 
     $('#player-save-playlist').click(function () {
         $('#playlistTitle').val('');
@@ -71,4 +66,33 @@
         }
         return false;
     });
+
+    // player init
+    playerSlider = new Foundation.Slider($('#player .slider'));
+    $('#player .slider').on('moved.zf.slider', function (e) {
+        var current = $(this).children('.slider-handle').attr('aria-valuenow');
+        setDuration(current);
+        return false;
+    });
+
+    $('#player .audio')[0].addEventListener("ended", function () {
+        playNext();
+    }, true);
+    $('#player .audio')[0].addEventListener("durationchange", function (e) {
+        updateDurations(0, this.duration);
+    }, true);
+    $('#player .audio')[0].addEventListener("timeupdate", function (e) {
+        updateDurations(this.currentTime, this.duration);
+    }, true);
+    $('#player-previous').click(function () { playPrevious(); });
+    $('#player-next').click(function () { playNext(); });
+
+    $('#player-play').click(function () {
+        playerPlay();
+    });
+    $('#player-volume').click(function () {
+        playerVolume();
+    });
 });
+
+var playerSlider;

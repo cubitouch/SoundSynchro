@@ -54,6 +54,26 @@ textarea {
     height: 90px;
 }
 
-.table{
-    width:100%;
+.table {
+    width: 100%;
+}
+
+.slider {
+    clear: both;
+}
+
+.slider-handle {
+    -moz-transition: none;
+    -o-transition: none;
+    -webkit-transition: none;
+    transition: none;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 10px;
+    border: 2px solid white;
+}
+
+
+.text-center .button {
+    float: none;
 }

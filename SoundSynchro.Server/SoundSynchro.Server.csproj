@@ -148,6 +148,9 @@
     <Content Include="Scripts\foundation\foundation.min.js" />
     <Content Include="Scripts\foundation\vendor\jquery.min.js" />
     <Content Include="Scripts\foundation\vendor\what-input.min.js" />
+    <Content Include="Scripts\foundation\foundation.min.js.map">
+      <DependentUpon>foundation.min.js</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
