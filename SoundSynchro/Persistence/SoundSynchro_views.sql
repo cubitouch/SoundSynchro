@@ -1,4 +1,4 @@
-﻿/* CodeFluent Generated Tuesday, 22 December 2015 14:46. TargetVersion:Default. Culture:fr-FR. UiCulture:fr-FR. Encoding:utf-8 (http://www.softfluent.com) */
+﻿/* CodeFluent Generated . TargetVersion:Default. Culture:fr-FR. UiCulture:fr-FR. Encoding:utf-8 (http://www.softfluent.com) */
 set quoted_identifier OFF
 GO
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.VIEWS WHERE TABLE_NAME = 'vMusic' AND TABLE_SCHEMA = 'dbo')
@@ -11,7 +11,7 @@ GO
 
 CREATE VIEW [dbo].[vMusic]
 AS
-SELECT [Music].[Music_id], [Music].[Music_title], [Music].[Music_file], [Music].[Music_thumbnail], [Music].[Music_date], [Music].[_rowVersion], [Music].[_trackCreationTime], [Music].[_trackLastWriteTime], [Music].[_trackCreationUser], [Music].[_trackLastWriteUser] 
+SELECT [Music].[Music_id], [Music].[Music_title], [Music].[Music_file], [Music].[Music_thumbnail], [Music].[Music_date], [Music].[Music_type], [Music].[_rowVersion], [Music].[_trackCreationTime], [Music].[_trackLastWriteTime], [Music].[_trackCreationUser], [Music].[_trackLastWriteUser] 
     FROM [Music]
 GO
 

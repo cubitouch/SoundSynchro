@@ -14,14 +14,28 @@ namespace SoundSynchro
         {
             get
             {
-                return string.Format("{0}/{1}/{2}", HttpContext.Current.Server.MapPath("~/uploads"), id, file);
+                switch (this.type)
+                {
+                    case MediaType.File:
+                        return string.Format("{0}/{1}/{2}", HttpContext.Current.Server.MapPath("~/uploads"), id, file);
+                    case MediaType.Youtube:
+                        return file;
+                }
+                return "";
             }
         }
         public string ThumbnailUri
         {
             get
             {
-                return string.Format("{0}/{1}/{2}", HttpContext.Current.Server.MapPath("~/uploads"), id, thumbnail);
+                switch (this.type)
+                {
+                    case MediaType.File:
+                        return string.Format("{0}/{1}/{2}", HttpContext.Current.Server.MapPath("~/uploads"), id, thumbnail);
+                    case MediaType.Youtube:
+                        return thumbnail;
+                }
+                return "";
             }
         }
 
@@ -29,14 +43,28 @@ namespace SoundSynchro
         {
             get
             {
-                return string.Format("{0}/{1}/{2}", VirtualPathUtility.ToAbsolute("~/uploads"), id, file);
+                switch (this.type)
+                {
+                    case MediaType.File:
+                        return string.Format("{0}/{1}/{2}", VirtualPathUtility.ToAbsolute("~/uploads"), id, file);
+                    case MediaType.Youtube:
+                        return file;
+                }
+                return "";
             }
         }
         public string ThumbnailUrl
         {
             get
             {
-                return string.Format("{0}/{1}/{2}", VirtualPathUtility.ToAbsolute("~/uploads"), id, thumbnail);
+                switch (this.type)
+                {
+                    case MediaType.File:
+                        return string.Format("{0}/{1}/{2}", VirtualPathUtility.ToAbsolute("~/uploads"), id, thumbnail);
+                    case MediaType.Youtube:
+                        return thumbnail;
+                }
+                return "";
             }
         }
 

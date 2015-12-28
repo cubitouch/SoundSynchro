@@ -27,3 +27,17 @@
 
     <input type="submit" value="Upload" class="button" />
 }
+<hr />
+@using (Html.BeginForm("StorageYoutube", "Home", FormMethod.Post, new { @class = "form", enctype = "multipart/form-data" }))
+{
+    <label>
+        Youtube link
+        <input type="text" name="link" id="link" class="form-control" />
+    </label>
+    <label>
+        Video title
+        <input type="text" name="title" id="title" class="form-control" />
+    </label>
+
+    <input type="submit" value="Add" class="button" />
+}

@@ -5918,14 +5918,17 @@
             }
         });
         var moveTime = _this.$element.data('dragging') ? 1000 / 60 : _this.options.moveTime;
-        /*var move = new */Foundation.Move(moveTime, $hndl, function () {
+        ///*var move = new */Foundation.Move(moveTime, $hndl, function () {
             $hndl.css(lOrT, movement + '%');
             if (!_this.options.doubleSided) {
                 _this.$fill.css(hOrW, pctOfBar * 100 + '%');
             } else {
                 _this.$fill.css(css);
             }
-        });
+            if (!noInvert) {
+                _this.$element.trigger('moved.zf.slider', [$hndl]);
+            }
+        //});
         // move.do();
     };
     /**

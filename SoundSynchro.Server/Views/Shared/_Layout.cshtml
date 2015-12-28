@@ -37,7 +37,15 @@
                 <div class="row">
                     <div id="player" class="media-object music-item columns small-12 text-center">
                         <div class="thumbnail">
-                            <img src="#" />
+                            <div id="player-file" class="hide">
+                                <img src="#" />
+                                <audio class="audio hide" controls>
+                                    <source src="#" type="audio/mpeg" />
+                                </audio>
+                            </div>
+                            <div id="player-youtube" class="hide">
+
+                            </div>
                         </div>
 
                         <h6 class="title music-title"></h6>
@@ -52,9 +60,6 @@
                             <a href="#" id="player-play" class="button"><i class="fa fa-pause"></i></a>
                             <a href="#" id="player-volume" class="button"><i class="fa fa-volume-up"></i></a>
                         </div>
-                        <audio class="audio hide" controls>
-                            <source src="#" type="audio/mpeg" />
-                        </audio>
                     </div>
                     <div class="columns small-12 text-center">
                         <div class="tiny button-group">

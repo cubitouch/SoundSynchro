@@ -9,7 +9,7 @@
 <div class="row">
     @foreach (Music music in Model)
     {
-        <div class="media-object music-item columns small-12 medium-6 large-4 text-center @(music==Model.Last()?"end":"")" data-id="@music.id" data-title="@music.title" data-audio="@music.AudioUrl" data-thumbnail="@music.ThumbnailUrl">
+        <div class="media-object music-item columns small-12 medium-6 large-4 text-center @(music==Model.Last()?"end":"")" data-id="@music.id" data-title="@music.title" data-audio="@music.AudioUrl" data-thumbnail="@music.ThumbnailUrl" data-type="@music.type">
             <div class="media-object-section">
                 <div class="thumbnail">
                     <img src="@music.ThumbnailUrl" />

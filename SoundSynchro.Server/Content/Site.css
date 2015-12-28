@@ -49,6 +49,21 @@ textarea {
         color: #fff;
     }
 
+#player .thumbnail {
+    width: 100%;
+    min-width: 200px;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#player-youtube{
+    width: 100%;
+    min-width: 200px;
+    min-height: 200px;
+}
+
 .thumbnail img {
     width: 120px;
     height: 90px;

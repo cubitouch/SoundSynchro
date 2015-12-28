@@ -1,5 +1,11 @@
-﻿/* CodeFluent Generated Tuesday, 22 December 2015 14:46. TargetVersion:Sql2008, Sql2012, Sql2014, SqlAzure. Culture:fr-FR. UiCulture:fr-FR. Encoding:utf-8 (http://www.softfluent.com) */
+﻿/* CodeFluent Generated . TargetVersion:Default. Culture:fr-FR. UiCulture:fr-FR. Encoding:utf-8 (http://www.softfluent.com) */
 set quoted_identifier OFF
+GO
+
+DECLARE @error int
+SELECT @error = error FROM master..sysmessages where error = 50001
+IF @@ROWCOUNT = 1 EXEC sp_dropmessage @msgnum = 50001, @lang = 'us_english'
+EXEC sp_addmessage @msgnum = 50001, @severity = 16, @msgtext = 'Concurrency error in procedure %s', @lang = 'us_english'
 GO
 
 IF  EXISTS (SELECT * FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_TYPE = 'FUNCTION' AND ROUTINE_NAME = 'cf_quotename')
@@ -48,7 +54,7 @@ DROP FUNCTION [dbo].[cf_modelVersion]
 GO
 CREATE FUNCTION [dbo].[cf_modelVersion]() RETURNS int AS
 BEGIN
-  RETURN -101256152
+  RETURN 0
 END
 GO
 

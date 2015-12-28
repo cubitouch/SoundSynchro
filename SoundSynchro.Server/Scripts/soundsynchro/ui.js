@@ -11,11 +11,29 @@ function str_pad_left(string, pad, length) {
 }
 
 function setDuration(current) {
-    $('#player .audio')[0].pause();
-    var currentTime = ($('#player .audio')[0].duration * current / 100)
-    $('#player .audio')[0].currentTime = currentTime;
-    if (currentTime != $('#player .audio')[0].duration) {
-        $('#player .audio')[0].play();
+    switch (_currentType) {
+        case "File":
+
+            var nextTime = (playerHTML5.duration * current / 100);
+            var wasPlaying = !playerHTML5.paused;
+            playerHTML5.pause();
+            playerHTML5.currentTime = nextTime;
+            if (nextTime != playerHTML5.duration && wasPlaying) {
+                playerHTML5.play();
+            }
+
+            break;
+        case "Youtube":
+
+            var nextTime = (playerYoutube.getDuration() * current / 100);
+            var wasPlaying = (_lastPlayerYoutubeState == YT.PlayerState.PLAYING);
+            playerYoutube.pauseVideo();
+            playerYoutube.seekTo(nextTime, true);
+            if (nextTime != playerYoutube.duration && wasPlaying) {
+                playerYoutube.playVideo();
+            }
+
+            break;
     }
 }
 function updateDurations(begin, end) {
@@ -25,32 +43,96 @@ function updateDurations(begin, end) {
     $('#player-duration-current').trigger('change');
 }
 
-function playerPlayMedia(_currentQueueItem) {
-    _currentId = _currentQueueItem.id;
+function playerPlayMedia(currentItem) {
+    if (currentItem.type == "Youtube" && !_playerYoutubeReady) {
+        return false;
+    }
+
+    if (currentItem.type != _currentType) {
+        playerYoutube.stopVideo();
+        playerHTML5.load();
+    }
+
+    _currentId = currentItem.id;
+    _currentType = currentItem.type;
     _currentIdPaused = "";
     playerPlay(true);
 
-    var needReload = ($('#player .audio source').attr("src") != _currentQueueItem.audio);
-    $('#player .title').text(_currentQueueItem.title);
-    $('#player .audio source').attr("src", _currentQueueItem.audio);
-    $('#player .thumbnail img').attr("src", _currentQueueItem.thumbnail);
-    if (needReload) {
-        $('#player .audio')[0].load();
+    $('#player-file').removeClass('hide').addClass('hide');
+    $('#player-youtube').removeClass('hide').addClass('hide');
+
+    $('#player .title').text(currentItem.title);
+
+    switch (_currentType) {
+        case 'File':
+            var needReload = ($('#player .audio source').attr("src") != currentItem.audio);
+
+            $('#player .audio source').attr("src", currentItem.audio);
+            $('#player .thumbnail img').attr("src", currentItem.thumbnail);
+            if (needReload) {
+                playerHTML5.load();
+            }
+            $('#player-file').removeClass('hide');
+            break;
+        case 'Youtube':
+            var needReload = (_lastPlayerYoutubeState == YT.PlayerState.PAUSED);
+            if (needReload) {
+                playerYoutube.playVideo();
+            } else {
+                playerYoutube.loadVideoById(currentItem.audio);
+            }
+            $('#player-youtube').removeClass('hide');
+            break;
+        case 'SoundCloud':
+            break;
     }
     playerPlay();
 }
 
-function playerPlay(forcePause) {
-    if (forcePause || $('#player-play').find('.fa-pause').length > 0) {
+function playerUIPlay(pause) {
+    if (pause) {
         // pause
         $('#player-play').find('.fa-pause').removeClass('fa-pause').addClass('fa-play');
-        $('#player .audio')[0].pause();
+    } else {
+        // play
+        $('#player-play').find('.fa-play').removeClass('fa-play').addClass('fa-pause');
+    }
+}
+function playerPlay(forcePause) {
+    var needPause = (forcePause || $('#player-play').find('.fa-pause').length > 0);
+    if (needPause) {
+        playerHTML5.pause();
+        if (playerYoutube.pauseVideo != undefined) {
+            playerYoutube.pauseVideo();
+        }
+    }
+    switch (_currentType) {
+        case "File":
+            if (needPause) {
+                // pause
+            } else {
+                // play
+                playerHTML5.play();
+            }
+            break;
+        case "Youtube":
+            if (needPause) {
+                // pause
+            } else {
+                // play
+                playerYoutube.playVideo();
+            }
+            break;
+    }
+
+    if (needPause) {
+        // pause
+        $('#player-play').find('.fa-pause').removeClass('fa-pause').addClass('fa-play');
         _currentIdPaused = _currentId;
         _currentId = "";
     } else {
         // play
         $('#player-play').find('.fa-play').removeClass('fa-play').addClass('fa-pause');
-        $('#player .audio')[0].play();
         _currentId = _currentIdPaused;
         _currentIdPaused = "";
     }
@@ -59,14 +141,29 @@ function playerPlay(forcePause) {
     renderMusicList();
 }
 function playerVolume() {
-    if ($('#player-volume').find('.fa-volume-up').length > 0) {
+    var needMute = ($('#player-volume').find('.fa-volume-up').length > 0);
+
+    switch (_currentType) {
+        case "File":
+            // mute
+            playerHTML5.muted = needMute;
+            break;
+        case "Youtube":
+            if (needMute) {
+                // pause
+                playerYoutube.mute();
+            } else {
+                // play
+                playerYoutube.unMute();
+            }
+            break;
+    }
+    if (needMute) {
         // mute
         $('#player-volume').find('.fa-volume-up').removeClass('fa-volume-up').addClass('fa-volume-off');
-        $('#player .audio')[0].muted = true;
     } else {
         // unmute
         $('#player-volume').find('.fa-volume-off').removeClass('fa-volume-off').addClass('fa-volume-up');
-        $('#player .audio')[0].muted = false;
     }
 }
 
@@ -74,13 +171,12 @@ function playerVolume() {
 
 var _currentQueue = [];
 var _currentId = "";
+var _currentType = "";
 var _currentIdPaused = "";
 
 function renderQueue() {
-    //console.log('---renderQueue---');
     $('#queue').empty();
     for (i = 0; i < _currentQueue.length  ; i++) {
-        //console.log(_currentQueue[i].title);
         $('#queue').append($('<li class="tabs-title ' + (_currentQueue[i].id == _currentId ? "active" : "") + '"><a href="#" class="music-queue-item" data-id="' + _currentQueue[i].id + '">' + _currentQueue[i].title + '</a></li>'));
     }
 
@@ -113,7 +209,6 @@ function playPrevious() {
 }
 
 function playQueue(id) {
-    //console.log('play id: ' + id);
     for (i = 0; i < _currentQueue.length  ; i++) {
         if (_currentQueue[i].id == id) {
             playerPlayMedia(_currentQueue[i]);
@@ -121,12 +216,13 @@ function playQueue(id) {
     }
     renderMusicList();
 }
-function addToQueue(id, title, audio, thumbnail) {
+function addToQueue(id, title, audio, thumbnail, type) {
     _currentQueue.push({
         id: id,
         title: title,
         audio: audio,
-        thumbnail: thumbnail
+        thumbnail: thumbnail,
+        type: type
     });
 }
 function deleteFromQueue(id) {
@@ -197,7 +293,8 @@ function initMusicList() {
                 $(this).data("id"),
                 $(this).data("title"),
                 $(this).data("audio"),
-                $(this).data("thumbnail"));
+                $(this).data("thumbnail"),
+                $(this).data("type"));
         }).promise().done(function () {
             playQueue(_currentQueue[0].id);
         });
@@ -215,7 +312,8 @@ function initMusicList() {
                 $(this).closest('.music-item').data("id"),
                 $(this).closest('.music-item').data("title"),
                 $(this).closest('.music-item').data("audio"),
-                $(this).closest('.music-item').data("thumbnail"));
+                $(this).closest('.music-item').data("thumbnail"),
+                $(this).closest('.music-item').data("type"));
         renderQueue();
     });
     $('.play-button').off('click').on('click', function () {
@@ -223,12 +321,13 @@ function initMusicList() {
         var title = $(this).closest('.music-item').data('title');
         var audio = $(this).closest('.music-item').data('audio');
         var thumbnail = $(this).closest('.music-item').data('thumbnail');
+        var type = $(this).closest('.music-item').data('type');
 
         if (id == _currentId) {
             playerPlay(true);
         } else {
             clearQueue();
-            addToQueue(id, title, audio, thumbnail);
+            addToQueue(id, title, audio, thumbnail, type);
             playQueue(id);
         }
 

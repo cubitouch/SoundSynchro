@@ -61,6 +61,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MediaType.cs">
+      <CodeFluentProducer>190edd35e7cabc482a4b350cecde9d17</CodeFluentProducer>
+    </Compile>
     <Compile Include="Music.cs">
       <CodeFluentProducer>190edd35e7cabc482a4b350cecde9d17</CodeFluentProducer>
     </Compile>
@@ -93,12 +96,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Persistence\SoundSynchro_runtime.sql">
-      <CodeFluentProducer>d971a138a131506a30c579daf17640f8</CodeFluentProducer>
+      <CodeFluentProducer>92c2f044907546de3904d40332860aac</CodeFluentProducer>
     </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Persistence\SoundSynchro_tables.sql">
-      <CodeFluentProducer>d971a138a131506a30c579daf17640f8</CodeFluentProducer>
+      <CodeFluentProducer>92c2f044907546de3904d40332860aac</CodeFluentProducer>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -108,22 +111,22 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Persistence\SoundSynchro_table_diffs.sql">
-      <CodeFluentProducer>d971a138a131506a30c579daf17640f8</CodeFluentProducer>
+      <CodeFluentProducer>92c2f044907546de3904d40332860aac</CodeFluentProducer>
     </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Persistence\SoundSynchro_procedures.sql">
-      <CodeFluentProducer>d971a138a131506a30c579daf17640f8</CodeFluentProducer>
+      <CodeFluentProducer>92c2f044907546de3904d40332860aac</CodeFluentProducer>
     </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Persistence\SoundSynchro_relations_drop.sql">
-      <CodeFluentProducer>d971a138a131506a30c579daf17640f8</CodeFluentProducer>
+      <CodeFluentProducer>92c2f044907546de3904d40332860aac</CodeFluentProducer>
     </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Persistence\SoundSynchro_relations_add.sql">
-      <CodeFluentProducer>d971a138a131506a30c579daf17640f8</CodeFluentProducer>
+      <CodeFluentProducer>92c2f044907546de3904d40332860aac</CodeFluentProducer>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

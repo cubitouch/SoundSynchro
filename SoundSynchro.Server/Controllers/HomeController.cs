@@ -37,7 +37,8 @@ namespace SoundSynchro.Server.Controllers
                 result.Append(" \"id\":\"" + music.id + "\",");
                 result.Append(" \"title\":\"" + music.title + "\",");
                 result.Append(" \"audio\":\"" + music.AudioUrl + "\",");
-                result.Append(" \"thumbnail\":\"" + music.ThumbnailUrl + "\"");
+                result.Append(" \"thumbnail\":\"" + music.ThumbnailUrl + "\",");
+                result.Append(" \"type\":\"" + music.type + "\"");
                 result.Append("}" + (music == musics.Last() ? "" : ","));
             }
             result.Append("]");
@@ -154,5 +155,22 @@ namespace SoundSynchro.Server.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public ActionResult StorageYoutube(string link, string title)
+        {
+            //https://www.youtube.com/watch?v=LG3fD7ONSJY&list=RDM5uIVBxWZVU&index=2
+            string id = link.Split('?')[1].Split('&').First(p => p.StartsWith("v=")).Replace("v=", "");
+
+            Music music = new Music();
+            music.file = id;
+            music.thumbnail = string.Format("https://i.ytimg.com/vi/{0}/default.jpg", id);
+            music.title = title;
+            music.type = MediaType.Youtube;
+            music.Save();
+
+            return RedirectToAction("Index");
+        }
+
     }
 }
