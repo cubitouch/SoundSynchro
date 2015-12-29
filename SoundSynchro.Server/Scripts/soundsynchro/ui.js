@@ -143,21 +143,15 @@ function playerPlay(forcePause) {
 function playerVolume() {
     var needMute = ($('#player-volume').find('.fa-volume-up').length > 0);
 
-    switch (_currentType) {
-        case "File":
-            // mute
-            playerHTML5.muted = needMute;
-            break;
-        case "Youtube":
-            if (needMute) {
-                // pause
-                playerYoutube.mute();
-            } else {
-                // play
-                playerYoutube.unMute();
-            }
-            break;
+    playerHTML5.muted = needMute;
+    if (needMute) {
+        // pause
+        playerYoutube.mute();
+    } else {
+        // play
+        playerYoutube.unMute();
     }
+
     if (needMute) {
         // mute
         $('#player-volume').find('.fa-volume-up').removeClass('fa-volume-up').addClass('fa-volume-off');
