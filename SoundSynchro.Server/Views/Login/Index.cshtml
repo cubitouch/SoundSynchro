@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "../Shared/_LayoutOffline.cshtml";
+}
+
+@using (Html.BeginForm("Index", "Login", FormMethod.Post, new { @class = "form", enctype = "multipart/form-data" }))
+{
+    <label>
+        Password
+        <input type="password" name="password" id="password" />
+    </label>
+
+    <input type="submit" value="Login" class="button" />
+}

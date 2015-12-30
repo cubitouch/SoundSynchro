@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Settings";
+}
+
+<h2>Storage</h2>
+<hr />
+@using (Html.BeginForm("SettingsManagementUpdate", "Home", FormMethod.Post, new { @class = "form", enctype = "multipart/form-data" }))
+{
+    <label>
+        Password protected
+        <input type="text" name="password" id="password" value="@SoundSynchro.Web.Security.AuthorizationManager.GetPassword()" />
+    </label>
+
+    <input type="submit" value="Update" class="button" />
+}

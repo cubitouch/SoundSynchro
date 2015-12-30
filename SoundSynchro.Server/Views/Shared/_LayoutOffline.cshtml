@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - SoundSynchro</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="body-content">
+        <div class="row expanded">
+            <div class="columns small-12">
+                @RenderBody()
+            </div>
+        </div>
+        <footer class="row text-center">
+            <div class="columns small-12">
+                <hr />
+                <p>&copy; @DateTime.Now.Year - SoundSynchro</p>
+            </div>
+        </footer>
+        @Scripts.Render("~/bundles/foundation")
+        @Scripts.Render("~/bundles/soundsynchro")
+        @RenderSection("scripts", required: false)
+        <script>
+            var _PlaylistCreateAction = "@Url.Action("PlaylistCreate")";
+            var _MusicSearchAction = "@Url.Action("MusicSearch")";
+            var _MusicDeleteAction = "@Url.Action("MusicDelete")";
+            var _MusicUpdateAction = "@Url.Action("MusicUpdate")";
+            var _PlaylistUpdateAction = "@Url.Action("PlaylistUpdate")";
+            var _PlaylistContentAction = "@Url.Action("PlaylistContent")";
+        </script>
+
+        <div id="musicEditor" class="reveal" data-reveal>
+            <h3>Edit music</h3>
+            <p>
+                <input id="musicId" type="hidden" value="" />
+                <label>
+                    Title
+                    <input id="musicTitle" name="title" type="text" />
+                </label>
+
+                <a href="#" id="musicDelete" class="button alert">Delete this music</a>
+            </p>
+
+            <a href="#" class="button secondary" data-close aria-label="Close reveal">Close</a>
+            <a href="#" id="musicUpdate" class="button">Save changes</a>
+
+            <button class="close-button" data-close aria-label="Close reveal" type="button">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <div id="playlistCreator" class="reveal" data-reveal>
+            <h3>Save playlist</h3>
+            <p>
+                <input id="musicId" type="hidden" value="" />
+                <label>
+                    Title
+                    <input id="playlistTitle" name="title" class="form-control" type="text" />
+                </label>
+            </p>
+
+            <a href="#" class="button secondary" data-close aria-label="Close reveal">Close</a>
+            <a href="#" id="playlistSave" class="button">Save playlist</a>
+
+            <button class="close-button" data-close aria-label="Close reveal" type="button">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+</body>
+</html>
+
+
+

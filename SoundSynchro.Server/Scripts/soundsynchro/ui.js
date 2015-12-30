@@ -68,7 +68,7 @@ function playerPlayMedia(currentItem) {
             var needReload = ($('#player .audio source').attr("src") != currentItem.audio);
 
             $('#player .audio source').attr("src", currentItem.audio);
-            $('#player .thumbnail img').attr("src", currentItem.thumbnail);
+            $('#player-file .cover').css("background-image", "url('" + currentItem.thumbnail + "')");
             if (needReload) {
                 playerHTML5.load();
             }

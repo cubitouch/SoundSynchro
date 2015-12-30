@@ -254,16 +254,6 @@ namespace SoundSynchro
                 {
                     return;
                 }
-                if (((this._entityState == CodeFluent.Runtime.CodeFluentEntityState.ToBeDeleted) 
-                            && (value == CodeFluent.Runtime.CodeFluentEntityState.Modified)))
-                {
-                    return;
-                }
-                if (((this._entityState == CodeFluent.Runtime.CodeFluentEntityState.Created) 
-                            && (value == CodeFluent.Runtime.CodeFluentEntityState.Modified)))
-                {
-                    return;
-                }
                 this._entityState = value;
                 this.OnPropertyChanged(new System.ComponentModel.PropertyChangedEventArgs("EntityState"));
             }
@@ -602,7 +592,6 @@ music = value as SoundSynchro.Music;
             persistence.AddParameter("@Music_thumbnail", this.thumbnail, default(string));
             persistence.AddParameter("@Music_date", this.date, CodeFluentPersistence.DefaultDateTimeValue);
             persistence.AddParameterEnumInt32("@Music_type", this.type, SoundSynchro.MediaType.File);
-            persistence.AddParameter("@_trackLastWriteUser", persistence.Context.User.Name);
             persistence.AddParameter("@_rowVersion", this.RowVersion);
             System.Data.IDataReader reader = null;
             try

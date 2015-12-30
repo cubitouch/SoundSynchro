@@ -1,5 +1,4 @@
-﻿using CodeFluent.Runtime.BinaryServices;
-using Newtonsoft.Json;
+﻿using SoundSynchro.Web.Security;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -172,5 +171,15 @@ namespace SoundSynchro.Server.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult SettingsManagement()
+        {
+            return PartialView("Settings");
+        }
+        [HttpPost]
+        public ActionResult SettingsManagementUpdate(string password)
+        {
+            AuthorizationManager.SetPassword(password.Trim());
+            return RedirectToAction("Index");
+        }
     }
 }

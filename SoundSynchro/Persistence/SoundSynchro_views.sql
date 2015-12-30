@@ -11,13 +11,13 @@ GO
 
 CREATE VIEW [dbo].[vMusic]
 AS
-SELECT [Music].[Music_id], [Music].[Music_title], [Music].[Music_file], [Music].[Music_thumbnail], [Music].[Music_date], [Music].[Music_type], [Music].[_rowVersion], [Music].[_trackCreationTime], [Music].[_trackLastWriteTime], [Music].[_trackCreationUser], [Music].[_trackLastWriteUser] 
+SELECT [Music].[Music_id], [Music].[Music_title], [Music].[Music_file], [Music].[Music_thumbnail], [Music].[Music_date], [Music].[Music_type], [Music].[_rowVersion] 
     FROM [Music]
 GO
 
 CREATE VIEW [dbo].[vPlaylist]
 AS
-SELECT [Playlist].[Playlist_id], [Playlist].[Playlist_date], [Playlist].[Playlist_title], [Playlist].[_rowVersion], [Playlist].[_trackCreationTime], [Playlist].[_trackLastWriteTime], [Playlist].[_trackCreationUser], [Playlist].[_trackLastWriteUser] 
+SELECT [Playlist].[Playlist_id], [Playlist].[Playlist_date], [Playlist].[Playlist_title], [Playlist].[_rowVersion] 
     FROM [Playlist]
 GO
 

@@ -11,9 +11,9 @@
     <div class="body-content">
         <div class="row expanded">
             <div class="small-6 medium-5 large-3 columns">
-                <ul id="sidemenu" class="tabs vertical ">
+                <ul id="sidemenu" class="tabs vertical">
                     <li class="tabs-title active">
-                        <a href="@Url.Action( "MusicList", "Home")"><i class="fa fa-home"></i> Home</a>
+                        <a href="@Url.Action("MusicList", "Home")"><i class="fa fa-home"></i> Home</a>
                     </li>
                     <li class="tabs-title">
                         <a href="@Url.Action("MusicList", "Home")"><i class="fa fa-music"></i> Musics</a>
@@ -24,6 +24,15 @@
                     <li class="tabs-title">
                         <a href="@Url.Action("StorageManagement", "Home")"><i class="fa fa-upload"></i> Storage</a>
                     </li>
+                    <li class="tabs-title">
+                        <a href="@Url.Action("SettingsManagement", "Home")"><i class="fa fa-cog"></i> Settings</a>
+                    </li>
+                    @if (SoundSynchro.Web.Security.AuthorizationManager.NeedPassword)
+                    {
+                        <li class="tabs-title">
+                            <a href="@Url.Action("Logout", "Login")" class="redirect"><i class="fa fa-sign-out"></i> Logout</a>
+                        </li>
+                    }
                 </ul>
                 <br />
                 <div class="input-group">
@@ -38,7 +47,7 @@
                     <div id="player" class="media-object music-item columns small-12 text-center">
                         <div class="thumbnail">
                             <div id="player-file" class="hide">
-                                <img src="#" />
+                                <div class="cover"></div>
                                 <audio class="audio hide" controls>
                                     <source src="#" type="audio/mpeg" />
                                 </audio>
@@ -71,6 +80,7 @@
                     </div>
                 </div>
             </div>
+
             <div id="content" class="small-6 medium-7 large-9 columns">
                 @RenderBody()
             </div>

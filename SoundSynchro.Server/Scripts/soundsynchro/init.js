@@ -9,12 +9,14 @@
     });
 
     $('#sidemenu li a').click(function () {
-        $.get($(this).attr('href'), function (html) {
-            $('#content').html(html);
-            initMusicList();
-            initPlaylistList();
-        });
-        return false;
+        if (!$(this).hasClass('redirect')) {
+            $.get($(this).attr('href'), function (html) {
+                $('#content').html(html);
+                initMusicList();
+                initPlaylistList();
+            });
+            return false;
+        }
     });
 
     initMusicList();

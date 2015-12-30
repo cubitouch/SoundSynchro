@@ -57,8 +57,24 @@ textarea {
     align-items: center;
     justify-content: center;
 }
+#player-file{
+    overflow:hidden;
+}
+#player-file .cover {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: brightness(0.8) blur(2px);
+    -webkit-filter: brightness(0.8) blur(2px);
+    -moz-filter: brightness(0.8) blur(2px);
+    -o-filter: brightness(0.8) blur(2px);
+    -ms-filter: brightness(0.8) blur(2px);
+    width: 100%;
+    height: 200px;
+}
 
-#player-youtube{
+#player-file,
+#player-youtube {
     width: 100%;
     min-width: 200px;
     min-height: 200px;
