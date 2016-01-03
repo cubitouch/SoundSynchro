@@ -41,3 +41,17 @@
 
     <input type="submit" value="Add" class="button" />
 }
+<hr />
+@using (Html.BeginForm("StorageSoundCloud", "Home", FormMethod.Post, new { @class = "form", enctype = "multipart/form-data" }))
+{
+    <label>
+        Soundcloud link
+        <input type="text" name="link" id="link" class="form-control" />
+    </label>
+    <label>
+        Music title
+        <input type="text" name="title" id="title" class="form-control" />
+    </label>
+
+    <input type="submit" value="Add" class="button" />
+}

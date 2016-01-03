@@ -50,9 +50,8 @@
                                     <source src="#" type="audio/mpeg" />
                                 </audio>
                             </div>
-                            <div id="player-youtube" class="hide">
-
-                            </div>
+                            <div id="player-youtube" class="hide"></div>
+                            <iframe id="player-soundcloud" class="hide" src="https://w.soundcloud.com/player/?"></iframe>
                         </div>
 
                         <h6 class="title music-title"></h6>
@@ -91,6 +90,7 @@
         </footer>
         @Scripts.Render("~/bundles/foundation")
         @Scripts.Render("~/bundles/soundsynchro")
+        <script src="https://w.soundcloud.com/player/api.js"></script>
         @RenderSection("scripts", required: false)
         <script>
             var _PlaylistCreateAction = "@Url.Action("PlaylistCreate")";

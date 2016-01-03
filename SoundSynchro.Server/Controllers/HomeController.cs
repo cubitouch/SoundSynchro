@@ -170,6 +170,22 @@ namespace SoundSynchro.Server.Controllers
 
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        public ActionResult StorageSoundCloud(string link, string title)
+        {
+            //https://soundcloud.com/hd_09/trumpets-jason-derulo
+            //string id = link.Split('?')[1].Split('&').First(p => p.StartsWith("v=")).Replace("v=", "");
+
+            Music music = new Music();
+            music.file = link;
+            //music.thumbnail = string.Format("https://i.ytimg.com/vi/{0}/default.jpg", id);
+            music.title = title;
+            music.type = MediaType.SoundCloud;
+            music.Save();
+
+            return RedirectToAction("Index");
+        }
+        
 
         public ActionResult SettingsManagement()
         {
