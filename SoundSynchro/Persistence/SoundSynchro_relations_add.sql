@@ -1,4 +1,4 @@
-﻿/* CodeFluent Generated . TargetVersion:Default. Culture:fr-FR. UiCulture:fr-FR. Encoding:utf-8 (http://www.softfluent.com) */
+﻿/* CodeFluent Generated . TargetVersion:Default. Culture:en-US. UiCulture:en-US. Encoding:utf-8 (http://www.softfluent.com) */
 set quoted_identifier OFF
 GO
 ALTER TABLE [dbo].[Playlist_musics_Music] WITH NOCHECK ADD CONSTRAINT [FK_Ply_Pla_Pla_Pla] FOREIGN KEY (

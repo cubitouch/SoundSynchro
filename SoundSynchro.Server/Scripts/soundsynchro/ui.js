@@ -11,6 +11,11 @@ function str_pad_left(string, pad, length) {
 }
 
 function setDuration(current) {
+    if (_playerRadioModeEnabled) {
+        $.post(_RadioContentSeekAction, { time: current }, function (html) {
+            // DO SOMETHING ?
+        });
+    }
     switch (_currentType) {
         case "File":
 
@@ -68,6 +73,11 @@ function playerPlayMedia(currentItem) {
     }
 
     _currentId = currentItem.id;
+    if (_playerRadioModeEnabled) {
+        $.post(_RadioContentPlayAction, { id: _currentId }, function (html) {
+            // DO SOMETHING ?
+        });
+    }
     _currentType = currentItem.type;
     _currentIdPaused = "";
     var needReloadGlobal = _currentIdPaused == currentItem.id;
@@ -208,6 +218,64 @@ function playerVolume() {
     } else {
         // unmute
         $('#player-volume').find('.fa-volume-off').removeClass('fa-volume-off').addClass('fa-volume-up');
+    }
+}
+
+var _playerRadioModeEnabled = false;
+var _playerRadioLastCurrentTime = 0;
+var _playerRadioLastCurrentMusicId = "";
+var _playerRadioWorkerId = "";
+var _playerRadioWorkerIsProcessing = false;
+function playerRadio() {
+    _playerRadioModeEnabled = ($('#player-radio').find('.fa-microphone-slash').length > 0);
+
+    if (_playerRadioModeEnabled) {
+        // radio on
+
+        // SET WORKER
+        _playerRadioWorkerId = window.setInterval(playerRadioRefresh, 1000);
+
+        $('#player-radio').find('.fa-microphone-slash').removeClass('fa-microphone-slash').addClass('fa-microphone');
+    } else {
+        // radio off
+
+        // CLEAR PLAYLIST
+        clearQueue();
+        // CLEAR WORKER
+        window.clearInterval(_playerRadioWorkerId);
+        _playerRadioWorkerIsProcessing = false;
+        _playerRadioLastCurrentTime = 0;
+        _playerRadioLastCurrentMusicId = "";
+
+        $('#player-radio').find('.fa-microphone').removeClass('fa-microphone').addClass('fa-microphone-slash');
+    }
+}
+function playerRadioRefresh() {
+    if (!_playerRadioWorkerIsProcessing) {
+        _playerRadioWorkerIsProcessing = true;
+        // LOAD PLAYLIST
+        $.get(_RadioContentAction, function (data) {
+            var radio = JSON.parse(data);
+            var musics = radio.content;
+
+            // REFRESH PLAYLIST
+            _currentQueue = musics; // ONLY IF DIFFERENT !
+
+            // RUN PLAYLIST
+            console.log(_playerRadioLastCurrentMusicId, radio.currentMusicId);
+            if (_playerRadioLastCurrentMusicId != radio.currentMusicId) {
+                _playerRadioLastCurrentMusicId = radio.currentMusicId;
+                playQueue((_playerRadioLastCurrentMusicId != '' ? _playerRadioLastCurrentMusicId : musics[0].id));
+            }
+            if (_playerRadioLastCurrentTime != radio.currentTime) {
+                _playerRadioLastCurrentTime = radio.currentTime;
+                setDuration(_playerRadioLastCurrentTime);
+            }
+
+            renderMusicList();
+            renderQueue();
+            _playerRadioWorkerIsProcessing = false;
+        });
     }
 }
 
@@ -352,13 +420,19 @@ function initMusicList() {
         _musicEditor.open();
     });
     $('.add-button').off('click').on('click', function () {
-        addToQueue(
-                $(this).closest('.music-item').data("id"),
-                $(this).closest('.music-item').data("title"),
-                $(this).closest('.music-item').data("audio"),
-                $(this).closest('.music-item').data("thumbnail"),
-                $(this).closest('.music-item').data("type"));
-        renderQueue();
+        if (_playerRadioModeEnabled) {
+            $.post(_RadioContentAddAction, { id: $(this).closest('.music-item').data("id") }, function (html) {
+                // Do someting ?
+            });
+        } else {
+            addToQueue(
+                    $(this).closest('.music-item').data("id"),
+                    $(this).closest('.music-item').data("title"),
+                    $(this).closest('.music-item').data("audio"),
+                    $(this).closest('.music-item').data("thumbnail"),
+                    $(this).closest('.music-item').data("type"));
+            renderQueue();
+        }
     });
     $('.play-button').off('click').on('click', function () {
         var id = $(this).closest('.music-item').data('id');
@@ -370,9 +444,15 @@ function initMusicList() {
         if (id == _currentId) {
             playerPlay(true);
         } else {
-            clearQueue();
-            addToQueue(id, title, audio, thumbnail, type);
-            playQueue(id);
+            if (_playerRadioModeEnabled) {
+                $.post(_RadioContentAddAction, { id: $(this).closest('.music-item').data("id"), forcePlay: true }, function (html) {
+                    // Do someting ?
+                });
+            } else {
+                clearQueue();
+                addToQueue(id, title, audio, thumbnail, type);
+                playQueue(id);
+            }
         }
 
         renderMusicList();

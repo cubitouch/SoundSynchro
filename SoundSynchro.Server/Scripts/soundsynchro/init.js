@@ -95,6 +95,9 @@
     $('#player-volume').click(function () {
         playerVolume();
     });
+    $('#player-radio').click(function () {
+        playerRadio();
+    });
 });
 
 var playerSlider;

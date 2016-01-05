@@ -67,6 +67,7 @@
     <Compile Include="Music.cs">
       <CodeFluentProducer>190edd35e7cabc482a4b350cecde9d17</CodeFluentProducer>
     </Compile>
+    <Compile Include="Playlist.partial.cs" />
     <Compile Include="Music.partial.cs" />
     <Compile Include="MusicCollection.cs">
       <CodeFluentProducer>190edd35e7cabc482a4b350cecde9d17</CodeFluentProducer>
@@ -84,6 +85,7 @@
     <Compile Include="Web\HttpHandler.cs">
       <CodeFluentProducer>190edd35e7cabc482a4b350cecde9d17</CodeFluentProducer>
     </Compile>
+    <Compile Include="Web\RadioManager.cs" />
     <Compile Include="Web\Security\AuthorizationManager.cs" />
     <Compile Include="_cf_rt.cs">
       <CodeFluentProducer>190edd35e7cabc482a4b350cecde9d17</CodeFluentProducer>

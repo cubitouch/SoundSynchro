@@ -1,4 +1,5 @@
-﻿using SoundSynchro.Web.Security;
+﻿using SoundSynchro.Web;
+using SoundSynchro.Web.Security;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -185,7 +186,7 @@ namespace SoundSynchro.Server.Controllers
 
             return RedirectToAction("Index");
         }
-        
+
 
         public ActionResult SettingsManagement()
         {
@@ -196,6 +197,64 @@ namespace SoundSynchro.Server.Controllers
         {
             AuthorizationManager.SetPassword(password.Trim());
             return RedirectToAction("Index");
+        }
+
+
+        //public string DeezerChannel()
+        //{
+        //    return "<script src=\"http://e-cdn-files.deezer.com/js/min/dz.js\"></script>";
+        //}
+
+        public string RadioContent()
+        {
+            MusicCollection musics = RadioManager.Current.musics;
+            StringBuilder result = new StringBuilder();
+
+            result.Append("{");
+            result.Append("\"currentTime\":\"" + RadioManager.Current.CurrentTime + "\",");
+            result.Append("\"currentMusicId\":\"" + RadioManager.Current.CurrentMusicId + "\",");
+            result.Append("\"content\": [");
+            foreach (Music music in musics)
+            {
+                result.Append("{");
+                result.Append(" \"id\":\"" + music.id + "\",");
+                result.Append(" \"title\":\"" + music.title + "\",");
+                result.Append(" \"audio\":\"" + music.AudioUrl + "\",");
+                result.Append(" \"thumbnail\":\"" + music.ThumbnailUrl + "\",");
+                result.Append(" \"type\":\"" + music.type + "\"");
+                result.Append("}" + (music == musics.Last() ? "" : ","));
+            }
+            result.Append("]");
+            result.Append("}");
+
+            return result.ToString();
+        }
+        public bool RadioContentAdd(Guid id, bool? forcePlay)
+        {
+            Music music = Music.Load(id);
+            if (music == null)
+            {
+                return false;
+            }
+            if (!RadioManager.Current.musics.Contains(music))
+            {
+                RadioManager.Current.musics.Add(music);
+            }
+            if (forcePlay.GetValueOrDefault())
+            {
+                RadioManager.Current.CurrentMusicId = id.ToString();
+            }
+            return true;
+        }
+        public bool RadioContentPlay(Guid id)
+        {
+            RadioManager.Current.CurrentMusicId = id.ToString();
+            return true;
+        }
+        public bool RadioContentSeek(double time)
+        {
+            RadioManager.Current.CurrentTime = time;
+            return true;
         }
     }
 }

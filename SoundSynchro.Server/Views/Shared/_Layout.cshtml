@@ -65,6 +65,7 @@
                         <div class="tiny button-group">
                             <a href="#" id="player-play" class="button"><i class="fa fa-pause"></i></a>
                             <a href="#" id="player-volume" class="button"><i class="fa fa-volume-up"></i></a>
+                            <a href="#" id="player-radio" class="button"><i class="fa fa-microphone-slash"></i></a>
                         </div>
                     </div>
                     <div class="columns small-12 text-center">
@@ -99,7 +100,44 @@
             var _MusicUpdateAction = "@Url.Action("MusicUpdate")";
             var _PlaylistUpdateAction = "@Url.Action("PlaylistUpdate")";
             var _PlaylistContentAction = "@Url.Action("PlaylistContent")";
+            var _RadioContentAction = "@Url.Action("RadioContent")";
+            var _RadioContentAddAction = "@Url.Action("RadioContentAdd")";
+            var _RadioContentPlayAction = "@Url.Action("RadioContentPlay")";
+            var _RadioContentSeekAction = "@Url.Action("RadioContentSeek")";
         </script>
+        @*<div id="dz-root"></div>
+            <div id="player-deezer"></div>
+            <script src="http://e-cdn-files.deezer.com/js/min/dz.js"></script>
+
+            <script>
+                window.dzAsyncInit = function () {
+                    console.log('test');
+                    DZ.init({
+                        appId: '170451',
+                        channelUrl: '@Url.Action("DeezerChannel")',
+                        player: {
+                            container: 'player-deezer',
+                            format: 'square',
+                            playlist: false,
+                            width: '200',
+                            height: '200',
+                            onload: function (response) {
+                                console.log('DZ.player is ready !', response);
+                                DZ.player.playTracks([3135556], function (e) {
+                                    console.log(e);
+                                });
+                            }
+                        }
+                    });
+                    console.log(DZ);
+                };
+                (function () {
+                    var e = document.createElement('script');
+                    e.src = 'http://e-cdn-files.deezer.com/js/min/dz.js';
+                    e.async = true;
+                    document.getElementById('dz-root').appendChild(e);
+                }());
+            </script>*@
 
         <div id="musicEditor" class="reveal" data-reveal>
             <h3>Edit music</h3>
