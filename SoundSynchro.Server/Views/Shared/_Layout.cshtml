@@ -1,181 +1,192 @@
-﻿<!DOCTYPE html>
+﻿<!doctype html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
     <title>@ViewBag.Title - SoundSynchro</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 </head>
+
+
+
 <body>
-    <div class="body-content">
-        <div class="row expanded">
-            <div class="small-6 medium-5 large-3 columns">
-                <ul id="sidemenu" class="tabs vertical">
-                    <li class="tabs-title active">
-                        <a href="@Url.Action("MusicList", "Home")"><i class="fa fa-home"></i> Home</a>
+    <div class="container">
+        <div class="box1">
+            <div class="logo-container">
+                <img class="logo" src="img/logo_soundsynchro.svg" />
+            </div>
+
+            <nav id="sidemenu" class="menu">
+                <ul>
+                    <li>
+                        <a href="@Url.Action("MusicList", "Home")">Musics</a>
                     </li>
-                    <li class="tabs-title">
-                        <a href="@Url.Action("MusicList", "Home")"><i class="fa fa-music"></i> Musics</a>
+                    <li>
+                        <a href="@Url.Action("PlaylistList", "Home")">Playlists</a>
                     </li>
-                    <li class="tabs-title">
-                        <a href="@Url.Action("PlaylistList", "Home")"><i class="fa fa-file-text"></i> Playlists</a>
+                    <li>
+                        <a href="@Url.Action("StorageManagement", "Home")">Storage</a>
                     </li>
-                    <li class="tabs-title">
-                        <a href="@Url.Action("StorageManagement", "Home")"><i class="fa fa-upload"></i> Storage</a>
-                    </li>
-                    <li class="tabs-title">
-                        <a href="@Url.Action("SettingsManagement", "Home")"><i class="fa fa-cog"></i> Settings</a>
+                    <li>
+                        <a href="@Url.Action("SettingsManagement", "Home")">Settings</a>
                     </li>
                     @if (SoundSynchro.Web.Security.AuthorizationManager.NeedPassword)
                     {
-                        <li class="tabs-title">
-                            <a href="@Url.Action("Logout", "Login")" class="redirect"><i class="fa fa-sign-out"></i> Logout</a>
+                        <li>
+                            <a href="@Url.Action("Logout", "Login")" class="redirect">Logout</a>
                         </li>
                     }
                 </ul>
-                <br />
-                <div class="input-group">
-                    <input id="search" type="text" class="input-group-field" placeholder="Search">
-                    <div class="input-group-button">
-                        <a id="searchButton" class="button" href="#"><i class="fa fa-search"></i></a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div id="player" class="media-object music-item columns small-12 text-center">
-                        <div class="thumbnail">
-                            <div id="player-file" class="hide">
-                                <div class="cover"></div>
-                                <audio class="audio hide" controls>
-                                    <source src="#" type="audio/mpeg" />
-                                </audio>
-                            </div>
-                            <div id="player-youtube" class="hide"></div>
-                            <iframe id="player-soundcloud" class="hide" src="https://w.soundcloud.com/player/?"></iframe>
-                        </div>
+            </nav>
 
-                        <h6 class="title music-title"></h6>
-                        <span id="player-duration-begin" class="label float-left">00:00</span>
-                        <span id="player-duration-end" class="label float-right">00:00</span>
-                        <div class="slider" data-slider data-initial-start="0">
-                            <span class="slider-handle" data-slider-handle role="slider" tabindex="1" aria-controls="player-duration-current"></span>
-                            <span class="slider-fill" data-slider-fill></span>
-                            <input type="hidden" id="player-duration-current" />
-                        </div>
-                        <div class="tiny button-group">
-                            <a href="#" id="player-play" class="button"><i class="fa fa-pause"></i></a>
-                            <a href="#" id="player-volume" class="button"><i class="fa fa-volume-up"></i></a>
-                            <a href="#" id="player-radio" class="button"><i class="fa fa-microphone-slash"></i></a>
-                        </div>
-                    </div>
-                    <div class="columns small-12 text-center">
-                        <div class="tiny button-group">
-                            <a href="#" id="player-previous" class="button"><i class="fa fa-backward"></i></a>
-                            <a href="#" id="player-save-playlist" class="button"><i class="fa fa-save"></i></a>
-                            <a href="#" id="player-next" class="button"><i class="fa fa-forward"></i></a>
-                        </div>
-                        <ul id="queue" class="tabs vertical"></ul>
-                    </div>
+        </div>
+        <div class="box2">
+            <div class="input-group">
+                <input id="search" type="text" class="input-group-field" placeholder="Search">
+                <div class="input-group-button">
+                    <a id="searchButton" class="button" href="#"><i class="fa fa-search"></i></a>
                 </div>
             </div>
-
-            <div id="content" class="small-6 medium-7 large-9 columns">
+            <div id="content" class="box2-container">
                 @RenderBody()
             </div>
         </div>
-        <footer class="row text-center">
-            <div class="columns small-12">
-                <hr />
-                <p>&copy; @DateTime.Now.Year - SoundSynchro</p>
+        <div class="box3">
+            <div id="player" class="player">
+                <div class="player-preview">
+                    <div id="player-file" class="hide">
+                        <div class="cover"></div>
+                        <audio class="audio hide" controls>
+                            <source src="#" type="audio/mpeg" />
+                        </audio>
+                    </div>
+                    <div id="player-youtube" class="hide"></div>
+                    <iframe id="player-soundcloud" class="hide" src="https://w.soundcloud.com/player/?"></iframe>
+                </div>
+                <div class="player-audio">
+
+                    <span id="player-duration-begin" class="player-duration begin">03:58</span>
+
+                    <div class="slider" data-slider data-initial-start="0">
+                        <span class="slider-handle" data-slider-handle role="slider" tabindex="1" aria-controls="player-duration-current"></span>
+                        <span class="slider-fill" data-slider-fill></span>
+                        <input type="hidden" id="player-duration-current" />
+                    </div>
+
+                    <span id="player-duration-end" class="player-duration end">03:58</span>
+
+                </div>
+                <div class="player-action">
+                    <div class="player-action-left">
+                        <a id="player-previous" class="button-fast-backward" href=""><i class="fa fa-fast-backward"></i></a>
+                        <a id="player-play" class="button-play" href=""><i class="fa fa-play"></i></a>
+                        <a id="player-next" class="button-fast-forward" href=""><i class="fa fa-fast-forward"></i></a>
+                    </div>
+                    <div class="player-action-right">
+                        <a id="player-save-playlist" href=""><i class="fa fa-save"></i></a>
+                        <a id="player-radio" href=""><i class="fa fa-microphone-slash"></i></a>
+                        <a id="player-volume" href=""><i class="fa fa-volume-up"></i></a>
+                    </div>
+                </div>
+
+                <div class="player-playlist-name">
+                    <h2 class="title">Playlist</h2>
+                </div>
             </div>
-        </footer>
-        @Scripts.Render("~/bundles/foundation")
-        @Scripts.Render("~/bundles/soundsynchro")
-        <script src="https://w.soundcloud.com/player/api.js"></script>
-        @RenderSection("scripts", required: false)
+            <div class="playlist">
+                <ul id="queue"></ul>
+            </div>
+        </div>
+    </div>
+
+
+    @Scripts.Render("~/bundles/foundation")
+    @Scripts.Render("~/bundles/soundsynchro")
+    <script src="https://w.soundcloud.com/player/api.js"></script>
+    @RenderSection("scripts", required: false)
+    <script>
+        var _PlaylistCreateAction = "@Url.Action("PlaylistCreate")";
+        var _MusicSearchAction = "@Url.Action("MusicSearch")";
+        var _MusicDeleteAction = "@Url.Action("MusicDelete")";
+        var _MusicUpdateAction = "@Url.Action("MusicUpdate")";
+        var _PlaylistUpdateAction = "@Url.Action("PlaylistUpdate")";
+        var _PlaylistContentAction = "@Url.Action("PlaylistContent")";
+        var _RadioContentAction = "@Url.Action("RadioContent")";
+        var _RadioContentAddAction = "@Url.Action("RadioContentAdd")";
+        var _RadioContentPlayAction = "@Url.Action("RadioContentPlay")";
+        var _RadioContentSeekAction = "@Url.Action("RadioContentSeek")";
+    </script>
+    @*<div id="dz-root"></div>
+        <div id="player-deezer"></div>
+        <script src="http://e-cdn-files.deezer.com/js/min/dz.js"></script>
+
         <script>
-            var _PlaylistCreateAction = "@Url.Action("PlaylistCreate")";
-            var _MusicSearchAction = "@Url.Action("MusicSearch")";
-            var _MusicDeleteAction = "@Url.Action("MusicDelete")";
-            var _MusicUpdateAction = "@Url.Action("MusicUpdate")";
-            var _PlaylistUpdateAction = "@Url.Action("PlaylistUpdate")";
-            var _PlaylistContentAction = "@Url.Action("PlaylistContent")";
-            var _RadioContentAction = "@Url.Action("RadioContent")";
-            var _RadioContentAddAction = "@Url.Action("RadioContentAdd")";
-            var _RadioContentPlayAction = "@Url.Action("RadioContentPlay")";
-            var _RadioContentSeekAction = "@Url.Action("RadioContentSeek")";
-        </script>
-        @*<div id="dz-root"></div>
-            <div id="player-deezer"></div>
-            <script src="http://e-cdn-files.deezer.com/js/min/dz.js"></script>
-
-            <script>
-                window.dzAsyncInit = function () {
-                    console.log('test');
-                    DZ.init({
-                        appId: '170451',
-                        channelUrl: '@Url.Action("DeezerChannel")',
-                        player: {
-                            container: 'player-deezer',
-                            format: 'square',
-                            playlist: false,
-                            width: '200',
-                            height: '200',
-                            onload: function (response) {
-                                console.log('DZ.player is ready !', response);
-                                DZ.player.playTracks([3135556], function (e) {
-                                    console.log(e);
-                                });
-                            }
+            window.dzAsyncInit = function () {
+                console.log('test');
+                DZ.init({
+                    appId: '170451',
+                    channelUrl: '@Url.Action("DeezerChannel")',
+                    player: {
+                        container: 'player-deezer',
+                        format: 'square',
+                        playlist: false,
+                        width: '200',
+                        height: '200',
+                        onload: function (response) {
+                            console.log('DZ.player is ready !', response);
+                            DZ.player.playTracks([3135556], function (e) {
+                                console.log(e);
+                            });
                         }
-                    });
-                    console.log(DZ);
-                };
-                (function () {
-                    var e = document.createElement('script');
-                    e.src = 'http://e-cdn-files.deezer.com/js/min/dz.js';
-                    e.async = true;
-                    document.getElementById('dz-root').appendChild(e);
-                }());
-            </script>*@
+                    }
+                });
+                console.log(DZ);
+            };
+            (function () {
+                var e = document.createElement('script');
+                e.src = 'http://e-cdn-files.deezer.com/js/min/dz.js';
+                e.async = true;
+                document.getElementById('dz-root').appendChild(e);
+            }());
+        </script>*@
 
-        <div id="musicEditor" class="reveal" data-reveal>
-            <h3>Edit music</h3>
-            <p>
-                <input id="musicId" type="hidden" value="" />
-                <label>
-                    Title
-                    <input id="musicTitle" name="title" type="text" />
-                </label>
+    <div id="musicEditor" class="reveal" data-reveal>
+        <h3>Edit music</h3>
+        <p>
+            <input id="musicId" type="hidden" value="" />
+            <label>
+                Title
+                <input id="musicTitle" name="title" type="text" />
+            </label>
 
-                <a href="#" id="musicDelete" class="button alert">Delete this music</a>
-            </p>
+            <a href="#" id="musicDelete" class="button alert">Delete this music</a>
+        </p>
 
-            <a href="#" class="button secondary" data-close aria-label="Close reveal">Close</a>
-            <a href="#" id="musicUpdate" class="button">Save changes</a>
+        <a href="#" class="button secondary" data-close aria-label="Close reveal">Close</a>
+        <a href="#" id="musicUpdate" class="button">Save changes</a>
 
-            <button class="close-button" data-close aria-label="Close reveal" type="button">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+        <button class="close-button" data-close aria-label="Close reveal" type="button">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 
-        <div id="playlistCreator" class="reveal" data-reveal>
-            <h3>Save playlist</h3>
-            <p>
-                <input id="musicId" type="hidden" value="" />
-                <label>
-                    Title
-                    <input id="playlistTitle" name="title" class="form-control" type="text" />
-                </label>
-            </p>
+    <div id="playlistCreator" class="reveal" data-reveal>
+        <h3>Save playlist</h3>
+        <p>
+            <input id="musicId" type="hidden" value="" />
+            <label>
+                Title
+                <input id="playlistTitle" name="title" class="form-control" type="text" />
+            </label>
+        </p>
 
-            <a href="#" class="button secondary" data-close aria-label="Close reveal">Close</a>
-            <a href="#" id="playlistSave" class="button">Save playlist</a>
+        <a href="#" class="button secondary" data-close aria-label="Close reveal">Close</a>
+        <a href="#" id="playlistSave" class="button">Save playlist</a>
 
-            <button class="close-button" data-close aria-label="Close reveal" type="button">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+        <button class="close-button" data-close aria-label="Close reveal" type="button">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
 </body>
 </html>

@@ -1,4 +1,6 @@
 ﻿$(function () {
+    $(document).foundation();
+
     $('#searchButton').click(function () {
         var search = $('#search').val();
 
@@ -86,17 +88,26 @@
     playerHTML5.addEventListener("timeupdate", function (e) {
         updateDurations(this.currentTime, this.duration);
     }, true);
-    $('#player-previous').click(function () { playPrevious(); });
-    $('#player-next').click(function () { playNext(); });
+    $('#player-previous').click(function () {
+        playPrevious();
+        return false;
+    });
+    $('#player-next').click(function () {
+        playNext();
+        return false;
+    });
 
     $('#player-play').click(function () {
         playerPlay();
+        return false;
     });
     $('#player-volume').click(function () {
         playerVolume();
+        return false;
     });
     $('#player-radio').click(function () {
         playerRadio();
+        return false;
     });
 });
 

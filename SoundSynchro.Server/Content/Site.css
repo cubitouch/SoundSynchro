@@ -1,29 +1,4 @@
-﻿body {
-    padding-top: 10px;
-    padding-bottom: 20px;
-}
-
-/* Set padding to keep content from hitting the edges */
-/*.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-}*/
-
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
-}
-
-/* Set width on the form input elements since they're 100% wide by default */
-/*input,
-select,
-textarea {
-    max-width: 280px;
-}*/
-
-.thumbnail {
+﻿.thumbnail {
     display: inline-block;
 }
 
@@ -35,10 +10,6 @@ textarea {
 }
 
 
-.tabs-title.active a {
-    background: #2199e8;
-    color: #fff;
-}
 
 .media-object {
     padding-top: 10px;
@@ -93,27 +64,28 @@ textarea {
     width: 100%;
 }
 
-.slider {
-    clear: both;
+
+.text-center .button {
+    float: none;
 }
 
+.slider-handle:hover {
+  background-color: #FF6D10;
+}
+ul {
+  list-style-type: none;
+  margin-left: 0;
+}
+
+
+
 .slider-handle {
-    -moz-transition: opacity 0.2s;
-    -o-transition: opacity 0.2s;
-    -webkit-transition: opacity 0.2s;
-    transition: opacity 0.2s;
+    -moz-transition: none;
+    -o-transition: none;
+    -webkit-transition: none;
+    transition: none;
     width: 1rem;
     height: 1rem;
     border-radius: 10px;
     border: 2px solid white;
-    opacity: 0;
-}
-
-.slider:hover .slider-handle {
-    opacity: 1;
-}
-
-
-.text-center .button {
-    float: none;
 }

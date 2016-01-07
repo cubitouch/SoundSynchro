@@ -135,6 +135,9 @@
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\foundation.css" />
     <Content Include="Content\foundation.min.css" />
+    <Content Include="img\logo_soundsynchro.png" />
+    <Content Include="img\logo_soundsynchro.svg" />
+    <Content Include="Content\styles.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
@@ -146,9 +149,18 @@
     <Content Include="fonts\FontAwesome.otf" />
     <None Include="Properties\PublishProfiles\soundsynchro.pubxml" />
     <Content Include="Scripts\foundation\foundation.js" />
-    <Content Include="Scripts\foundation\foundation.min.js" />
+    <Content Include="Scripts\foundation\foundation.min.js">
+      <DependentUpon>foundation.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\foundation\foundation.old.js" />
+    <Content Include="Scripts\foundation\foundation.old.min.js">
+      <DependentUpon>foundation.old.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\foundation\vendor\jquery.min.js" />
     <Content Include="Scripts\foundation\vendor\what-input.min.js" />
+    <Content Include="Scripts\foundation\foundation.old.min.js.map">
+      <DependentUpon>foundation.old.min.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\foundation\foundation.min.js.map">
       <DependentUpon>foundation.min.js</DependentUpon>
     </Content>

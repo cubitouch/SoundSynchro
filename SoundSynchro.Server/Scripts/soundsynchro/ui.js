@@ -289,7 +289,7 @@ var _currentIdPaused = "";
 function renderQueue() {
     $('#queue').empty();
     for (i = 0; i < _currentQueue.length  ; i++) {
-        $('#queue').append($('<li class="tabs-title ' + (_currentQueue[i].id == _currentId ? "active" : "") + '"><a href="#" class="music-queue-item" data-id="' + _currentQueue[i].id + '">' + _currentQueue[i].title + '</a></li>'));
+        $('#queue').append($('<li class="' + (_currentQueue[i].id == _currentId ? "active" : "") + '"><a href="#" class="music-queue-item" data-id="' + _currentQueue[i].id + '"><span>' + _currentQueue[i].title + '</span></a></li>'));
     }
 
     $('.music-queue-item').click(function () {
