@@ -55,6 +55,17 @@
     border: none;
 }
 
+#player-deezer {
+    padding-top: 55px;
+}
+
+#dzplayer {
+    width: 100%;
+    min-width: 200px;
+    height: 92px !important;
+    border: none;
+}
+
 .thumbnail img {
     width: 120px;
     height: 90px;
@@ -70,11 +81,12 @@
 }
 
 .slider-handle:hover {
-  background-color: #FF6D10;
+    background-color: #FF6D10;
 }
+
 ul {
-  list-style-type: none;
-  margin-left: 0;
+    list-style-type: none;
+    margin-left: 0;
 }
 
 

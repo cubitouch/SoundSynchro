@@ -52,6 +52,15 @@ function setDuration(current) {
             });
 
             break;
+        case "Deezer":
+            var wasPlaying = (playerDeezer.isPlaying);
+            playerDeezer.pause();
+            playerDeezer.seek(current, true);
+            if (nextTime != playerDeezer.getCurrentTrack().duration && wasPlaying) {
+                playerDeezer.play();
+            }
+
+            break;
     }
 }
 function updateDurations(begin, end) {
@@ -62,7 +71,7 @@ function updateDurations(begin, end) {
 }
 
 function playerPlayMedia(currentItem) {
-    if (!_playerYoutubeReady || !_playerSoundCloudReady) {
+    if (!_playerYoutubeReady || !_playerSoundCloudReady || !_playerDeezerReady) {
         return false;
     }
 
@@ -70,6 +79,7 @@ function playerPlayMedia(currentItem) {
         playerYoutube.stopVideo();
         playerSoundCloud.pause();
         playerHTML5.load();
+        playerDeezer.pause();
     }
 
     _currentId = currentItem.id;
@@ -79,13 +89,14 @@ function playerPlayMedia(currentItem) {
         });
     }
     _currentType = currentItem.type;
+    var needReloadGlobal = (_currentIdPaused == currentItem.id);
     _currentIdPaused = "";
-    var needReloadGlobal = _currentIdPaused == currentItem.id;
     playerPlay(true);
 
     $('#player-file').removeClass('hide').addClass('hide');
     $('#player-youtube').removeClass('hide').addClass('hide');
     $('#player-soundcloud').removeClass('hide').addClass('hide');
+    $('#player-deezer').removeClass('hide').addClass('hide');
 
     $('#player .title').text(currentItem.title);
 
@@ -131,6 +142,17 @@ function playerPlayMedia(currentItem) {
             }
             $('#player-soundcloud').removeClass('hide');
             break;
+        case 'Deezer':
+            var needReload = (!playerDeezer.isPlaying() && needReloadGlobal);
+            if (needReload) {
+                playerDeezer.play();
+            } else {
+                playerDeezer.playTracks([currentItem.audio], function (e) {
+                    //console.log(e);
+                });
+            }
+            $('#player-deezer').removeClass('hide');
+            break;
     }
     playerPlay();
 }
@@ -153,6 +175,7 @@ function playerPlay(forcePause) {
             playerYoutube.pauseVideo();
         }
         playerSoundCloud.pause();
+        playerDeezer.pause();
     } else {
         // play
         switch (_currentType) {
@@ -164,6 +187,9 @@ function playerPlay(forcePause) {
                 break;
             case "SoundCloud":
                 playerSoundCloud.play();
+                break;
+            case "Deezer":
+                playerDeezer.play();
                 break;
         }
     }
@@ -202,6 +228,7 @@ function playerVolume() {
     var needMute = ($('#player-volume').find('.fa-volume-up').length > 0);
 
     playerHTML5.muted = needMute;
+    playerDeezer.setMute(needMute);
     if (needMute) {
         // mute
         playerYoutube.mute();
@@ -262,7 +289,7 @@ function playerRadioRefresh() {
             _currentQueue = musics; // ONLY IF DIFFERENT !
 
             // RUN PLAYLIST
-            console.log(_playerRadioLastCurrentMusicId, radio.currentMusicId);
+            //console.log(_playerRadioLastCurrentMusicId, radio.currentMusicId);
             if (_playerRadioLastCurrentMusicId != radio.currentMusicId) {
                 _playerRadioLastCurrentMusicId = radio.currentMusicId;
                 playQueue((_playerRadioLastCurrentMusicId != '' ? _playerRadioLastCurrentMusicId : musics[0].id));

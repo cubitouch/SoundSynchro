@@ -13,3 +13,13 @@
 
     <input type="submit" value="Update" class="button" />
 }
+<hr />
+@using (Html.BeginForm("APIKeyManagementUpdate", "Home", FormMethod.Post, new { @class = "form", enctype = "multipart/form-data" }))
+{
+    <label>
+        Deezer API Key
+        <input type="text" name="deezerKey" id="deezerKey" value="@SoundSynchro.Web.APIKeyManager.GetValue(SoundSynchro.MediaType.Deezer)" />
+    </label>
+
+    <input type="submit" value="Update" class="button" />
+}

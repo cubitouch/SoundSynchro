@@ -163,6 +163,7 @@ namespace SoundSynchro.Server.Controllers
             string id = link.Split('?')[1].Split('&').First(p => p.StartsWith("v=")).Replace("v=", "");
 
             Music music = new Music();
+            music.date = DateTime.Now;
             music.file = id;
             music.thumbnail = string.Format("https://i.ytimg.com/vi/{0}/default.jpg", id);
             music.title = title;
@@ -178,6 +179,7 @@ namespace SoundSynchro.Server.Controllers
             //string id = link.Split('?')[1].Split('&').First(p => p.StartsWith("v=")).Replace("v=", "");
 
             Music music = new Music();
+            music.date = DateTime.Now;
             music.file = link;
             //music.thumbnail = string.Format("https://i.ytimg.com/vi/{0}/default.jpg", id);
             music.title = title;
@@ -186,7 +188,22 @@ namespace SoundSynchro.Server.Controllers
 
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        public ActionResult StorageDeezer(string link, string title)
+        {
+            //http://www.deezer.com/track/110908332?utm_source=deezer&utm_content=track-110908332&utm_term=720819781_1452253365&utm_medium=web
+            string id = link.Split('?').First().Split('/').Last();
 
+            Music music = new Music();
+            music.date = DateTime.Now;
+            music.file = id;
+            //music.thumbnail = string.Format("https://i.ytimg.com/vi/{0}/default.jpg", id);
+            music.title = title;
+            music.type = MediaType.Deezer;
+            music.Save();
+
+            return RedirectToAction("Index");
+        }
 
         public ActionResult SettingsManagement()
         {
@@ -199,11 +216,17 @@ namespace SoundSynchro.Server.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public ActionResult APIKeyManagementUpdate(string deezerKey)
+        {
+            APIKeyManager.SetValue(MediaType.Deezer, deezerKey);
+            return RedirectToAction("Index");
+        }
 
-        //public string DeezerChannel()
-        //{
-        //    return "<script src=\"http://e-cdn-files.deezer.com/js/min/dz.js\"></script>";
-        //}
+        public string DeezerChannel()
+        {
+            return "<script src=\"http://e-cdn-files.deezer.com/js/min/dz.js\"></script>";
+        }
 
         public string RadioContent()
         {

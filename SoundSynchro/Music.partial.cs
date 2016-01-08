@@ -18,9 +18,7 @@ namespace SoundSynchro
                 {
                     case MediaType.File:
                         return string.Format("{0}/{1}/{2}", HttpContext.Current.Server.MapPath("~/uploads"), id, file);
-                    case MediaType.Youtube:
-                        return file;
-                    case MediaType.SoundCloud:
+                    default:
                         return file;
                 }
                 return "";
@@ -34,9 +32,7 @@ namespace SoundSynchro
                 {
                     case MediaType.File:
                         return string.Format("{0}/{1}/{2}", HttpContext.Current.Server.MapPath("~/uploads"), id, thumbnail);
-                    case MediaType.Youtube:
-                        return thumbnail;
-                    case MediaType.SoundCloud:
+                    default:
                         return thumbnail;
                 }
                 return "";
@@ -51,9 +47,7 @@ namespace SoundSynchro
                 {
                     case MediaType.File:
                         return string.Format("{0}/{1}/{2}", VirtualPathUtility.ToAbsolute("~/uploads"), id, file);
-                    case MediaType.Youtube:
-                        return file;
-                    case MediaType.SoundCloud:
+                    default:
                         return file;
                 }
                 return "";
@@ -67,9 +61,7 @@ namespace SoundSynchro
                 {
                     case MediaType.File:
                         return string.Format("{0}/{1}/{2}", VirtualPathUtility.ToAbsolute("~/uploads"), id, thumbnail);
-                    case MediaType.Youtube:
-                        return thumbnail;
-                    case MediaType.SoundCloud:
+                    default:
                         return thumbnail;
                 }
                 return "";

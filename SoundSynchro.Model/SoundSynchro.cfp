@@ -26,5 +26,6 @@
     <cf:enumerationValue name="File" />
     <cf:enumerationValue name="Youtube" />
     <cf:enumerationValue name="SoundCloud" />
+    <cf:enumerationValue name="Deezer" />
   </cf:enumeration>
 </cf:project>

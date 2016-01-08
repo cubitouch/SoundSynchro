@@ -63,6 +63,8 @@
                     </div>
                     <div id="player-youtube" class="hide"></div>
                     <iframe id="player-soundcloud" class="hide" src="https://w.soundcloud.com/player/?"></iframe>
+                    <div id="dz-root"></div>
+                    <div id="player-deezer"></div>
                 </div>
                 <div class="player-audio">
 
@@ -116,40 +118,12 @@
         var _RadioContentAddAction = "@Url.Action("RadioContentAdd")";
         var _RadioContentPlayAction = "@Url.Action("RadioContentPlay")";
         var _RadioContentSeekAction = "@Url.Action("RadioContentSeek")";
+
+
+        var _DeezerAPIKey = "@SoundSynchro.Web.APIKeyManager.GetValue(SoundSynchro.MediaType.Deezer)";
     </script>
     @*<div id="dz-root"></div>
-        <div id="player-deezer"></div>
-        <script src="http://e-cdn-files.deezer.com/js/min/dz.js"></script>
-
-        <script>
-            window.dzAsyncInit = function () {
-                console.log('test');
-                DZ.init({
-                    appId: '170451',
-                    channelUrl: '@Url.Action("DeezerChannel")',
-                    player: {
-                        container: 'player-deezer',
-                        format: 'square',
-                        playlist: false,
-                        width: '200',
-                        height: '200',
-                        onload: function (response) {
-                            console.log('DZ.player is ready !', response);
-                            DZ.player.playTracks([3135556], function (e) {
-                                console.log(e);
-                            });
-                        }
-                    }
-                });
-                console.log(DZ);
-            };
-            (function () {
-                var e = document.createElement('script');
-                e.src = 'http://e-cdn-files.deezer.com/js/min/dz.js';
-                e.async = true;
-                document.getElementById('dz-root').appendChild(e);
-            }());
-        </script>*@
+    *@
 
     <div id="musicEditor" class="reveal" data-reveal>
         <h3>Edit music</h3>

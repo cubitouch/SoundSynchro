@@ -25,5 +25,7 @@ namespace SoundSynchro
         Youtube = 1,
         
         SoundCloud = 2,
+        
+        Deezer = 3,
     }
 }
