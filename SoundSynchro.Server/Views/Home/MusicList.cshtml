@@ -1,28 +1,32 @@
 ﻿@using SoundSynchro
 @model MusicCollection
-<h2>
+<h1>
     Musics
-    <div class="pull-right">
+    @*<div class="pull-right">
         <a id="play-all" href="#" class="button"><i class="fa fa-play-circle"></i> Play all</a>
-    </div>
-</h2>
-<div class="row">
-    @foreach (Music music in Model)
-    {
-        <div class="media-object music-item columns small-12 medium-6 large-4 text-center @(music==Model.Last()?"end":"")" data-id="@music.id" data-title="@music.title" data-audio="@music.AudioUrl" data-thumbnail="@music.ThumbnailUrl" data-type="@music.type">
-            <div class="media-object-section">
-                <div class="thumbnail">
-                    <img src="@music.ThumbnailUrl" />
+    </div>*@
+</h1>
+<div class="music-container">
+    <ul>
+        @foreach (Music music in Model)
+        {
+            <li class="music-item" data-id="@music.id" data-title="@music.title" data-audio="@music.AudioUrl" data-thumbnail="@music.ThumbnailUrl" data-type="@music.type">
+                <a class="music-card play-button" href="#">
+                    <div class="img-container">
+                        <img src="@music.ThumbnailUrl" />
+                        <i class="fa fa-play-circle-o"></i>
+                    </div>
+
+                    <div class="informations">
+                        @*<span class="artist-name">Lomepal</span>*@
+                        <span class="class-name">@music.title</span>
+                    </div>
+                </a>
+                <div class="actions">
+                    <a class="edit-button" href="#"><i class="fa fa-edit"></i></a>
+                    <a class="add-button" href="#"><i class="fa fa-plus"></i></a>
                 </div>
-            </div>
-            <div class="media-object-section">
-                <h6 class="music-title">@music.title</h6>
-                <div class="tiny button-group">
-                    <a class="play-button button" href="#"><i class="fa fa-play"></i></a>
-                    <a class="edit-button button" href="#"><i class="fa fa-edit"></i></a>
-                    <a class="add-button button" href="#"><i class="fa fa-plus"></i></a>
-                </div>
-            </div>
-        </div>
-    }
+            </li>
+        }
+    </ul>
 </div>

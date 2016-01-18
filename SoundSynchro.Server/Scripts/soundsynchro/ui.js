@@ -491,10 +491,10 @@ function renderMusicList() {
     $('.music-item').each(function (i, el) {
         if ($(el).data("id") == _currentId) {
             $(el).addClass('active');
-            $(el).find('.play-button').html('<i class="fa fa-pause"></i>');
+            $(el).find('.play-button').find('.fa').removeClass('fa-play-circle-o').addClass('fa-pause');
         } else {
             $(el).removeClass('active');
-            $(el).find('.play-button').html('<i class="fa fa-play"></i>');
+            $(el).find('.play-button').find('.fa').removeClass('fa-pause').addClass('fa-play-circle-o');
         }
     });
 

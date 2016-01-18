@@ -28,6 +28,7 @@ namespace SoundSynchro.Server
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/foundation.css",
                       "~/Content/font-awesome.min.css",
+                      "~/Content/reset.css",
                       "~/Content/styles.css",
                       "~/Content/site.css"));
         }

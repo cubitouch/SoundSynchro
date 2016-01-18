@@ -135,6 +135,7 @@
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\foundation.css" />
     <Content Include="Content\foundation.min.css" />
+    <Content Include="Content\reset.css" />
     <Content Include="img\logo_soundsynchro.png" />
     <Content Include="img\logo_soundsynchro.svg" />
     <Content Include="Content\styles.css" />
@@ -147,7 +148,6 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
-    <None Include="Properties\PublishProfiles\soundsynchro.pubxml" />
     <Content Include="Scripts\foundation\foundation.js" />
     <Content Include="Scripts\foundation\foundation.min.js">
       <DependentUpon>foundation.js</DependentUpon>

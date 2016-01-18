@@ -100,12 +100,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Persistence\SoundSynchro_runtime.sql">
-      <CodeFluentProducer>92c2f044907546de3904d40332860aac</CodeFluentProducer>
+      <CodeFluentProducer>d971a138a131506a30c579daf17640f8</CodeFluentProducer>
     </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Persistence\SoundSynchro_tables.sql">
-      <CodeFluentProducer>92c2f044907546de3904d40332860aac</CodeFluentProducer>
+      <CodeFluentProducer>d971a138a131506a30c579daf17640f8</CodeFluentProducer>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -115,22 +115,22 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Persistence\SoundSynchro_table_diffs.sql">
-      <CodeFluentProducer>92c2f044907546de3904d40332860aac</CodeFluentProducer>
+      <CodeFluentProducer>d971a138a131506a30c579daf17640f8</CodeFluentProducer>
     </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Persistence\SoundSynchro_procedures.sql">
-      <CodeFluentProducer>92c2f044907546de3904d40332860aac</CodeFluentProducer>
+      <CodeFluentProducer>d971a138a131506a30c579daf17640f8</CodeFluentProducer>
     </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Persistence\SoundSynchro_relations_drop.sql">
-      <CodeFluentProducer>92c2f044907546de3904d40332860aac</CodeFluentProducer>
+      <CodeFluentProducer>d971a138a131506a30c579daf17640f8</CodeFluentProducer>
     </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Persistence\SoundSynchro_relations_add.sql">
-      <CodeFluentProducer>92c2f044907546de3904d40332860aac</CodeFluentProducer>
+      <CodeFluentProducer>d971a138a131506a30c579daf17640f8</CodeFluentProducer>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

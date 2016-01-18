@@ -1,4 +1,4 @@
-﻿/* CodeFluent Generated . TargetVersion:Default. Culture:en-US. UiCulture:en-US. Encoding:utf-8 (http://www.softfluent.com) */
+﻿/* CodeFluent Generated . TargetVersion:Sql2008, Sql2012, Sql2014, SqlAzure. Culture:en-US. UiCulture:en-US. Encoding:utf-8 (http://www.softfluent.com) */
 set quoted_identifier OFF
 GO
 IF EXISTS (SELECT * FROM [dbo].[sysobjects] WHERE id = object_id(N'[dbo].[Music_Delete]') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
@@ -71,16 +71,16 @@ BEGIN
  SELECT @tran = 1
  BEGIN TRANSACTION
 END
-DELETE FROM [Playlist_musics_Music]
+DELETE [Playlist_musics_Music] FROM [Playlist_musics_Music] 
     WHERE ([Playlist_musics_Music].[Music_id] = @Music_id)
 SELECT @error = @@ERROR, @rowcount = @@ROWCOUNT
-DELETE FROM [Music]
+DELETE [Music] FROM [Music] 
     WHERE (([Music].[Music_id] = @Music_id) AND ([Music].[_rowVersion] = @_rowVersion))
 SELECT @error = @@ERROR, @rowcount = @@ROWCOUNT
 IF(@rowcount = 0)
 BEGIN
     IF @tran = 1 ROLLBACK TRANSACTION
-    RAISERROR (50001, 16, 1, 'Music_Delete')
+    RAISERROR ('Concurrency error in procedure %s', 16, 1, 'Music_Delete')
     RETURN
 END
 IF @tran = 1 COMMIT TRANSACTION
@@ -102,7 +102,7 @@ BEGIN
  SELECT @tran = 1
  BEGIN TRANSACTION
 END
-DELETE FROM [Playlist_musics_Music]
+DELETE [Playlist_musics_Music] FROM [Playlist_musics_Music] 
     WHERE (([Playlist_musics_Music].[Music_id] = @Music_id) AND ([Playlist_musics_Music].[Playlist_id] = @Playlist_id))
 SELECT @error = @@ERROR, @rowcount = @@ROWCOUNT
 IF @tran = 1 COMMIT TRANSACTION
@@ -147,11 +147,11 @@ BEGIN
     IF(@rowcount = 0)
     BEGIN
         IF @tran = 1 ROLLBACK TRANSACTION
-        RAISERROR (50001, 16, 1, 'Music_Save')
+        RAISERROR ('Concurrency error in procedure %s', 16, 1, 'Music_Save')
         RETURN
     END
     SELECT DISTINCT [Music].[_rowVersion] 
-        FROM [Music]
+        FROM [Music] 
         WHERE ([Music].[Music_id] = @Music_id)
 END
 ELSE
@@ -177,7 +177,7 @@ BEGIN
         RETURN
     END
     SELECT DISTINCT [Music].[_rowVersion] 
-        FROM [Music]
+        FROM [Music] 
         WHERE ([Music].[Music_id] = @Music_id)
 END
 IF @tran = 1 COMMIT TRANSACTION
@@ -200,7 +200,7 @@ BEGIN
  BEGIN TRANSACTION
 END
 SELECT DISTINCT TOP 1 [Playlist_musics_Music].[Playlist_id] 
-    FROM [Playlist_musics_Music]
+    FROM [Playlist_musics_Music] 
     WHERE (([Playlist_musics_Music].[Music_id] = @Music_id) AND ([Playlist_musics_Music].[Playlist_id] = @Playlist_id))
 SELECT @error = @@ERROR, @rowcount = @@ROWCOUNT
 IF(@error != 0)
@@ -242,16 +242,16 @@ BEGIN
  SELECT @tran = 1
  BEGIN TRANSACTION
 END
-DELETE FROM [Playlist_musics_Music]
+DELETE [Playlist_musics_Music] FROM [Playlist_musics_Music] 
     WHERE ([Playlist_musics_Music].[Playlist_id] = @Playlist_id)
 SELECT @error = @@ERROR, @rowcount = @@ROWCOUNT
-DELETE FROM [Playlist]
+DELETE [Playlist] FROM [Playlist] 
     WHERE (([Playlist].[Playlist_id] = @Playlist_id) AND ([Playlist].[_rowVersion] = @_rowVersion))
 SELECT @error = @@ERROR, @rowcount = @@ROWCOUNT
 IF(@rowcount = 0)
 BEGIN
     IF @tran = 1 ROLLBACK TRANSACTION
-    RAISERROR (50001, 16, 1, 'Playlist_Delete')
+    RAISERROR ('Concurrency error in procedure %s', 16, 1, 'Playlist_Delete')
     RETURN
 END
 IF @tran = 1 COMMIT TRANSACTION
@@ -290,11 +290,11 @@ BEGIN
     IF(@rowcount = 0)
     BEGIN
         IF @tran = 1 ROLLBACK TRANSACTION
-        RAISERROR (50001, 16, 1, 'Playlist_Save')
+        RAISERROR ('Concurrency error in procedure %s', 16, 1, 'Playlist_Save')
         RETURN
     END
     SELECT DISTINCT [Playlist].[_rowVersion] 
-        FROM [Playlist]
+        FROM [Playlist] 
         WHERE ([Playlist].[Playlist_id] = @Playlist_id)
 END
 ELSE
@@ -314,7 +314,7 @@ BEGIN
         RETURN
     END
     SELECT DISTINCT [Playlist].[_rowVersion] 
-        FROM [Playlist]
+        FROM [Playlist] 
         WHERE ([Playlist].[Playlist_id] = @Playlist_id)
 END
 IF @tran = 1 COMMIT TRANSACTION
@@ -329,7 +329,7 @@ CREATE PROCEDURE [dbo].[Music_Load]
 AS
 SET NOCOUNT ON
 SELECT DISTINCT [Music].[Music_id], [Music].[Music_title], [Music].[Music_file], [Music].[Music_thumbnail], [Music].[Music_date], [Music].[Music_type], [Music].[_rowVersion] 
-    FROM [Music]
+    FROM [Music] 
     WHERE ([Music].[Music_id] = @id)
 
 RETURN
@@ -343,7 +343,7 @@ CREATE PROCEDURE [dbo].[Music_LoadAll]
 AS
 SET NOCOUNT ON
 SELECT DISTINCT [Music].[Music_id], [Music].[Music_title], [Music].[Music_file], [Music].[Music_thumbnail], [Music].[Music_date], [Music].[Music_type], [Music].[_rowVersion] 
-    FROM [Music]
+    FROM [Music] 
 
 RETURN
 GO
@@ -355,7 +355,7 @@ CREATE PROCEDURE [dbo].[Music_LoadByid]
 AS
 SET NOCOUNT ON
 SELECT DISTINCT [Music].[Music_id], [Music].[Music_title], [Music].[Music_file], [Music].[Music_thumbnail], [Music].[Music_date], [Music].[Music_type], [Music].[_rowVersion] 
-    FROM [Music]
+    FROM [Music] 
     WHERE ([Music].[Music_id] = @id)
 
 RETURN
@@ -372,7 +372,7 @@ SET NOCOUNT ON
 SELECT DISTINCT [Music].[Music_id], [Music].[Music_title], [Music].[Music_file], [Music].[Music_thumbnail], [Music].[Music_date], [Music].[Music_type], [Music].[_rowVersion] 
     FROM [Music]
         LEFT OUTER JOIN [Playlist_musics_Music] ON ([Music].[Music_id] = [Playlist_musics_Music].[Music_id])
-                LEFT OUTER JOIN [Playlist] ON ([Playlist_musics_Music].[Playlist_id] = [Playlist].[Playlist_id])
+                LEFT OUTER JOIN [Playlist] ON ([Playlist_musics_Music].[Playlist_id] = [Playlist].[Playlist_id]) 
     WHERE ([Playlist_musics_Music].[Playlist_id] = @Playlistid)
 
 RETURN
@@ -387,7 +387,7 @@ CREATE PROCEDURE [dbo].[Music_SearchAll]
 AS
 SET NOCOUNT ON
 SELECT DISTINCT [Music].[Music_id], [Music].[Music_title], [Music].[Music_file], [Music].[Music_thumbnail], [Music].[Music_date], [Music].[Music_type], [Music].[_rowVersion] 
-    FROM [Music]
+    FROM [Music] 
     WHERE ([Music].[Music_title] LIKE '%'+@s+'%')
 
 RETURN
@@ -400,7 +400,7 @@ CREATE PROCEDURE [dbo].[Playlist_Load]
 AS
 SET NOCOUNT ON
 SELECT DISTINCT [Playlist].[Playlist_id], [Playlist].[Playlist_date], [Playlist].[Playlist_title], [Playlist].[_rowVersion] 
-    FROM [Playlist]
+    FROM [Playlist] 
     WHERE ([Playlist].[Playlist_id] = @id)
 
 RETURN
@@ -414,7 +414,7 @@ CREATE PROCEDURE [dbo].[Playlist_LoadAll]
 AS
 SET NOCOUNT ON
 SELECT DISTINCT [Playlist].[Playlist_id], [Playlist].[Playlist_date], [Playlist].[Playlist_title], [Playlist].[_rowVersion] 
-    FROM [Playlist]
+    FROM [Playlist] 
 
 RETURN
 GO
@@ -426,7 +426,7 @@ CREATE PROCEDURE [dbo].[Playlist_LoadByid]
 AS
 SET NOCOUNT ON
 SELECT DISTINCT [Playlist].[Playlist_id], [Playlist].[Playlist_date], [Playlist].[Playlist_title], [Playlist].[_rowVersion] 
-    FROM [Playlist]
+    FROM [Playlist] 
     WHERE ([Playlist].[Playlist_id] = @id)
 
 RETURN
