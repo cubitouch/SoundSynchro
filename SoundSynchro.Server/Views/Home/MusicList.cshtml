@@ -10,7 +10,7 @@
     <ul>
         @foreach (Music music in Model)
         {
-            <li class="music-item" data-id="@music.id" data-title="@music.title" data-audio="@music.AudioUrl" data-thumbnail="@music.ThumbnailUrl" data-type="@music.type">
+            <li class="music-item music-item-@music.type" data-id="@music.id" data-title="@music.title" data-audio="@music.AudioUrl" data-thumbnail="@music.ThumbnailUrl" data-type="@music.type">
                 <a class="music-card play-button" href="#">
                     <div class="img-container">
                         <img src="@music.ThumbnailUrl" />
