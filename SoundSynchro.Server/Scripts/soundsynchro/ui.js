@@ -357,6 +357,12 @@ function playQueue(id) {
     renderMusicList();
 }
 function addToQueue(id, title, audio, thumbnail, type) {
+    for (var i = 0; i < _currentQueue.length; i++) {
+        if (_currentQueue[i].id == id) {
+            return false;
+        }
+    }
+
     _currentQueue.push({
         id: id,
         title: title,
@@ -364,6 +370,8 @@ function addToQueue(id, title, audio, thumbnail, type) {
         thumbnail: thumbnail,
         type: type
     });
+
+    return true;
 }
 function deleteFromQueue(id) {
     for (i = 0; i < _currentQueue.length  ; i++) {
