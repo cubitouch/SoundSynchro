@@ -89,6 +89,7 @@ function playerPlayMedia(currentItem) {
         });
     }
     _currentType = currentItem.type;
+    $('.player-preview').attr('class', 'player-preview player-preview-' + _currentType);
     var needReloadGlobal = (_currentIdPaused == currentItem.id);
     _currentIdPaused = "";
     playerPlay(true);
