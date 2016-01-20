@@ -351,14 +351,14 @@ body {
 
 
 .player {
-    height: 348px;
+    height: 344px;
     width: 453px;
     background-color: brown;
 }
 
 .player-preview {
     width: 100%;
-    height: 204px;
+    height: 200px;
     background-color: indianred;
 }
 
@@ -468,7 +468,7 @@ body {
 
 .playlist {
     background-color: wheat;
-    height: calc(100% - 348px);
+    height: calc(100% - 344px);
     overflow-y: scroll;
 }
 

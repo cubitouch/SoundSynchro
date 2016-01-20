@@ -42,12 +42,6 @@
 
         </div>
         <div class="box2">
-            <div class="input-group">
-                <input id="search" type="text" class="input-group-field" placeholder="Search">
-                <div class="input-group-button">
-                    <a id="searchButton" class="button" href="#"><i class="fa fa-search"></i></a>
-                </div>
-            </div>
             <div id="content" class="box2-container">
                 @RenderBody()
             </div>
@@ -68,7 +62,7 @@
                 </div>
                 <div class="player-audio">
 
-                    <span id="player-duration-begin" class="player-duration begin">03:58</span>
+                    <span id="player-duration-begin" class="player-duration begin">00:00</span>
 
                     <div class="slider" data-slider data-initial-start="0">
                         <span class="slider-handle" data-slider-handle role="slider" tabindex="1" aria-controls="player-duration-current"></span>
@@ -76,7 +70,7 @@
                         <input type="hidden" id="player-duration-current" />
                     </div>
 
-                    <span id="player-duration-end" class="player-duration end">03:58</span>
+                    <span id="player-duration-end" class="player-duration end">00:00</span>
 
                 </div>
                 <div class="player-action">
@@ -118,9 +112,11 @@
         var _RadioContentAddAction = "@Url.Action("RadioContentAdd")";
         var _RadioContentPlayAction = "@Url.Action("RadioContentPlay")";
         var _RadioContentSeekAction = "@Url.Action("RadioContentSeek")";
-
+        var _SearchEnginePushAction = "@Url.Action("SearchEnginePush")";
 
         var _DeezerAPIKey = "@SoundSynchro.Web.APIKeyManager.GetValue(SoundSynchro.MediaType.Deezer)";
+        var _YoutubeAPIKey = "@SoundSynchro.Web.APIKeyManager.GetValue(SoundSynchro.MediaType.Youtube)";
+        var _SoundCloudAPIKey = "@SoundSynchro.Web.APIKeyManager.GetValue(SoundSynchro.MediaType.SoundCloud)";
     </script>
     @*<div id="dz-root"></div>
     *@
