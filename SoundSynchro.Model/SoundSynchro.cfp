@@ -15,6 +15,7 @@
     <cf:property name="date" typeName="datetime" />
     <cf:property name="type" typeName="{0}.MediaType" />
     <cf:method name="SearchAll" body="LOAD(string s)&#xD;&#xA;WHERE title LIKE ['%%'+@s+'%%']" checkLevel="None" />
+    <cf:method name="LoadByFile" body="LOADONE(string f)&#xD;&#xA;WHERE file=@f" />
   </cf:entity>
   <cf:entity name="Playlist" namespace="SoundSynchro" categoryPath="/SoundSynchro">
     <cf:property name="id" key="true" />

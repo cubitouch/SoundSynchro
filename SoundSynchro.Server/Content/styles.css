@@ -149,6 +149,9 @@ body {
             background-color: #1c1c1c;
             height: 48px;
             width: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
             .box2-container ul li .music-card .img-container .fa {
@@ -170,7 +173,7 @@ body {
 
         .box2-container ul li .music-card .img-container img {
             float: left;
-            height: 48px;
+            /*height: 48px;*/
         }
 
         .box2-container ul li .music-card:hover .img-container img {
@@ -592,4 +595,13 @@ body {
 
 .slider:hover .slider-handle {
     opacity: 1;
+}
+
+.music-item{
+        float: left;
+        position: relative;
+        /*margin: 0 0 6px 0;*/
+        /*padding: 0 24px;*/
+        height: 48px;
+        width: 100%;
 }

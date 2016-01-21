@@ -284,12 +284,15 @@ namespace SoundSynchro.Server.Controllers
 
         public string SearchEnginePush(string type, string id, string title, string thumbnail)
         {
-            Music music = new Music();
-            music.type = (MediaType)Enum.Parse(typeof(MediaType), type);
-            music.title = title;
-            music.file = id;
-            music.thumbnail = thumbnail;
-            music.Save();
+            Music music = Music.LoadByFile(id);
+            if (music == null)
+            {
+                music.type = (MediaType)Enum.Parse(typeof(MediaType), type);
+                music.title = title;
+                music.file = id;
+                music.thumbnail = thumbnail;
+                music.Save();
+            }
 
             StringBuilder result = new StringBuilder();
             result.Append("{");

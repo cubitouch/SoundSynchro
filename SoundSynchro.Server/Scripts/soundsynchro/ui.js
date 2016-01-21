@@ -1,4 +1,5 @@
-﻿// player
+﻿var _defaultThumbnailUrl = "/img/sound_synchro_thumbnail.png";
+// player
 
 function formatTime(time) {
     time = Math.floor(time);
@@ -106,7 +107,7 @@ function playerPlayMedia(currentItem) {
             var needReload = ($('#player .audio source').attr("src") != currentItem.audio);
 
             $('#player .audio source').attr("src", currentItem.audio);
-            $('#player-file .cover').css("background-image", "url('" + currentItem.thumbnail + "')");
+            $('#player-file .cover').css("background-image", "url('" + (currentItem.thumbnail ? currentItem.thumbnail : _defaultThumbnailUrl) + "')");
             if (needReload) {
                 playerHTML5.load();
             }

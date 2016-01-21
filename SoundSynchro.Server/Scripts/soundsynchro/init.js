@@ -1,6 +1,25 @@
 ﻿$(function () {
     $(document).foundation();
 
+    document.addEventListener("dragover", function (event) {
+        if ($('#dropper').length == 0) {
+            $('body').append('<textarea id="dropper"></textarea>');
+            $('#dropper').change(function () {
+                console.log("drop", $('#dropper').val());
+                $('#dropper').remove();
+            });
+        }
+    }, false);
+    document.addEventListener("drop", function (event) {
+        setTimeout(function () { $('#dropper').trigger("change"); }, 200);
+    }, false);
+
+    $('.music-item .img-container img').each(function (i, el) {
+        if ($(this).attr('src') == '') {
+            $(this).attr('src', _defaultThumbnailUrl);
+        }
+    });
+
     $('#searchButton').click(function () {
         var search = $('#search').val();
 
