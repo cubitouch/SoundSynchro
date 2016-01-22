@@ -13,7 +13,8 @@ IF EXISTS (SELECT * FROM [dbo].[sysobjects] WHERE id = object_id(N'[dbo].[Playli
 DROP TABLE [dbo].[Playlist_musics_Music]
 GO
 
-/* no fk for 'PK_Mus_Mus_Mus', tableName='Music' table='null' */
+IF EXISTS (SELECT * FROM [dbo].[sysobjects] WHERE id = object_id(N'[dbo].[FK_Ply_Mus_Mus_Mus]') AND parent_obj = object_id(N'[dbo].[Playlist_musics_Music]'))
+ ALTER TABLE [dbo].[Playlist_musics_Music] DROP CONSTRAINT [FK_Ply_Mus_Mus_Mus]
 IF EXISTS (SELECT * FROM [dbo].[sysobjects] WHERE id = object_id(N'[dbo].[PK_Mus_Mus_Mus]') AND parent_obj = object_id(N'[dbo].[Music]'))
  ALTER TABLE [dbo].[Music] DROP CONSTRAINT [PK_Mus_Mus_Mus]
 GO
@@ -33,7 +34,8 @@ CREATE TABLE [dbo].[Music] (
 )
 GO
 
-/* no fk for 'PK_Pla_Pla_Pla', tableName='Playlist' table='null' */
+IF EXISTS (SELECT * FROM [dbo].[sysobjects] WHERE id = object_id(N'[dbo].[FK_Ply_Pla_Pla_Pla]') AND parent_obj = object_id(N'[dbo].[Playlist_musics_Music]'))
+ ALTER TABLE [dbo].[Playlist_musics_Music] DROP CONSTRAINT [FK_Ply_Pla_Pla_Pla]
 IF EXISTS (SELECT * FROM [dbo].[sysobjects] WHERE id = object_id(N'[dbo].[PK_Pla_Pla_Pla]') AND parent_obj = object_id(N'[dbo].[Playlist]'))
  ALTER TABLE [dbo].[Playlist] DROP CONSTRAINT [PK_Pla_Pla_Pla]
 GO
@@ -50,7 +52,7 @@ CREATE TABLE [dbo].[Playlist] (
 )
 GO
 
-/* no fk for 'PK_Ply_Pla_Mus_Ply', tableName='Playlist_musics_Music' table='null' */
+/* no fk for 'PK_Ply_Pla_Mus_Ply', tableName='Playlist_musics_Music' table='Playlist_musics_Music' */
 IF EXISTS (SELECT * FROM [dbo].[sysobjects] WHERE id = object_id(N'[dbo].[PK_Ply_Pla_Mus_Ply]') AND parent_obj = object_id(N'[dbo].[Playlist_musics_Music]'))
  ALTER TABLE [dbo].[Playlist_musics_Music] DROP CONSTRAINT [PK_Ply_Pla_Mus_Ply]
 GO

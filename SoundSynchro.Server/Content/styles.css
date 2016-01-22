@@ -85,14 +85,51 @@ body {
     overflow-x: hidden;
 }
 
-    .box2-container h1 {
+    .box2-container .box2-header {
         display: block;
-        padding: 0 0 0 24px;
-        background-color: #ffffff;
-        font-size: 24px;
-        line-height: 60px;
-        font-weight: 400;
+        padding: 0 24px;
+        background: #ffffff;
+        width: 100%;
+        height: 60px;
     }
+
+        .box2-container .box2-header h1 {
+            float: left;
+            display: inline-block;
+            background-color: #ffffff;
+            font-size: 24px;
+            line-height: 60px;
+            font-weight: 400;
+        }
+
+        .box2-container .box2-header input {
+            float: right;
+            margin: 6px 0;
+            padding: 6px 12px;
+            border: 1px solid #f1f1f1;
+            height: 48px;
+        }
+
+            .box2-container .box2-header input:focus {
+                outline: none;
+                border-top: 1px solid #FF6D10;
+                border-left: 1px solid #FF6D10;
+                border-bottom: 1px solid #FF6D10;
+            }
+
+            .box2-container .box2-header input.submit {
+                font-family: 'Roboto', sans-serif;
+                border: 1px solid #FF6D10;
+                background-color: rgba(255,109,16,1);
+                color: #ffffff;
+                text-transform: uppercase;
+                cursor: pointer;
+            }
+
+                .box2-container .box2-header input.submit:hover {
+                    background-color: rgba(255,109,16,0.8);
+                }
+
 
     .box2-container ul li .music-card {
         float: left;
@@ -112,6 +149,9 @@ body {
             background-color: #1c1c1c;
             height: 48px;
             width: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
             .box2-container ul li .music-card .img-container .fa {
@@ -133,7 +173,7 @@ body {
 
         .box2-container ul li .music-card .img-container img {
             float: left;
-            height: 48px;
+            /*height: 48px;*/
         }
 
         .box2-container ul li .music-card:hover .img-container img {
@@ -314,14 +354,14 @@ body {
 
 
 .player {
-    height: 348px;
+    height: 344px;
     width: 453px;
     background-color: brown;
 }
 
 .player-preview {
     width: 100%;
-    height: 204px;
+    height: 200px;
     background-color: indianred;
 }
 
@@ -431,7 +471,7 @@ body {
 
 .playlist {
     background-color: wheat;
-    height: calc(100% - 348px);
+    height: calc(100% - 344px);
     overflow-y: scroll;
 }
 
@@ -555,4 +595,13 @@ body {
 
 .slider:hover .slider-handle {
     opacity: 1;
+}
+
+.music-item{
+        float: left;
+        position: relative;
+        /*margin: 0 0 6px 0;*/
+        /*padding: 0 24px;*/
+        height: 48px;
+        width: 100%;
 }

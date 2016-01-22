@@ -528,6 +528,39 @@ music = value as SoundSynchro.Music;
             return null;
         }
         
+        [System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, false)]
+        public static SoundSynchro.Music LoadByFile(string f)
+        {
+            if ((f == default(string)))
+            {
+                return null;
+            }
+            SoundSynchro.Music music = new SoundSynchro.Music();
+            CodeFluent.Runtime.CodeFluentPersistence persistence = CodeFluentContext.Get(SoundSynchro.Constants.SoundSynchroStoreName).Persistence;
+            persistence.CreateStoredProcedureCommand(null, "Music", "LoadByFile");
+            persistence.AddParameter("@f", f);
+            System.Data.IDataReader reader = null;
+            try
+            {
+                reader = persistence.ExecuteReader();
+                if ((reader.Read() == true))
+                {
+                    music.ReadRecord(reader, CodeFluent.Runtime.CodeFluentReloadOptions.Default);
+                    music.EntityState = CodeFluent.Runtime.CodeFluentEntityState.Unchanged;
+                    return music;
+                }
+            }
+            finally
+            {
+                if ((reader != null))
+                {
+                    reader.Dispose();
+                }
+                persistence.CompleteCommand();
+            }
+            return null;
+        }
+        
         public virtual bool Reload(CodeFluent.Runtime.CodeFluentReloadOptions options)
         {
             bool ret = false;

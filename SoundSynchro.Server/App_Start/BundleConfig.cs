@@ -22,6 +22,8 @@ namespace SoundSynchro.Server
                       "~/Scripts/foundation/foundation.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/soundsynchro").Include(
+                      "~/Scripts/soundsynchro/handlebars.js",
+                      "~/Scripts/soundsynchro/typeahead.jquery.js",
                       "~/Scripts/soundsynchro/init.js",
                       "~/Scripts/soundsynchro/ui.js"));
 

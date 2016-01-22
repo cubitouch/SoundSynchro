@@ -33,6 +33,10 @@ IF EXISTS (SELECT * FROM [dbo].[sysobjects] WHERE id = object_id(N'[dbo].[Music_
 DROP PROCEDURE [dbo].[Music_LoadAll]
 GO
 
+IF EXISTS (SELECT * FROM [dbo].[sysobjects] WHERE id = object_id(N'[dbo].[Music_LoadByFile]') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE [dbo].[Music_LoadByFile]
+GO
+
 IF EXISTS (SELECT * FROM [dbo].[sysobjects] WHERE id = object_id(N'[dbo].[Music_LoadByid]') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
 DROP PROCEDURE [dbo].[Music_LoadByid]
 GO
@@ -344,6 +348,19 @@ AS
 SET NOCOUNT ON
 SELECT DISTINCT [Music].[Music_id], [Music].[Music_title], [Music].[Music_file], [Music].[Music_thumbnail], [Music].[Music_date], [Music].[Music_type], [Music].[_rowVersion] 
     FROM [Music] 
+
+RETURN
+GO
+
+CREATE PROCEDURE [dbo].[Music_LoadByFile]
+(
+ @f [nvarchar] (256)
+)
+AS
+SET NOCOUNT ON
+SELECT DISTINCT [Music].[Music_id], [Music].[Music_title], [Music].[Music_file], [Music].[Music_thumbnail], [Music].[Music_date], [Music].[Music_type], [Music].[_rowVersion] 
+    FROM [Music] 
+    WHERE ([Music].[Music_file] = @f)
 
 RETURN
 GO

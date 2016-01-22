@@ -2,7 +2,17 @@
     ViewBag.Title = "Storage";
 }
 
-<h2>Storage</h2>
+<div class="box2-header">
+    <h1>
+        Storage
+    </h1>
+    <div class="search-box">
+        <form id="searchbox" action="">
+            <input id="submit" type="submit" class="submit" value="Search">
+            <input id="search" type="text" placeholder="Type here">
+        </form>
+    </div>
+</div>
 <hr />
 @using (Html.BeginForm("Storage", "Home", FormMethod.Post, new { @class = "form", enctype = "multipart/form-data" }))
 {

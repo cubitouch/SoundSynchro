@@ -1,4 +1,5 @@
-﻿// player
+﻿var _defaultThumbnailUrl = "/img/sound_synchro_thumbnail.png";
+// player
 
 function formatTime(time) {
     time = Math.floor(time);
@@ -106,7 +107,7 @@ function playerPlayMedia(currentItem) {
             var needReload = ($('#player .audio source').attr("src") != currentItem.audio);
 
             $('#player .audio source').attr("src", currentItem.audio);
-            $('#player-file .cover').css("background-image", "url('" + currentItem.thumbnail + "')");
+            $('#player-file .cover').css("background-image", "url('" + (currentItem.thumbnail ? currentItem.thumbnail : _defaultThumbnailUrl) + "')");
             if (needReload) {
                 playerHTML5.load();
             }
@@ -257,6 +258,7 @@ var _playerRadioWorkerIsProcessing = false;
 function playerRadio() {
     _playerRadioModeEnabled = ($('#player-radio').find('.fa-microphone-slash').length > 0);
 
+    $('#player-radio-clients').text('');
     if (_playerRadioModeEnabled) {
         // radio on
 
@@ -282,9 +284,12 @@ function playerRadioRefresh() {
     if (!_playerRadioWorkerIsProcessing) {
         _playerRadioWorkerIsProcessing = true;
         // LOAD PLAYLIST
-        $.get(_RadioContentAction, function (data) {
+        $.get(_RadioContentAction + "?clientId=" + _clientId, function (data) {
             var radio = JSON.parse(data);
             var musics = radio.content;
+
+            // CLIENTS NUMBERR
+            $('#player-radio-clients').text(radio.currentClientsNumber);
 
             // REFRESH PLAYLIST
             _currentQueue = musics; // ONLY IF DIFFERENT !

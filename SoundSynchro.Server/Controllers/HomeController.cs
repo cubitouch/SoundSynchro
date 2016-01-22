@@ -217,9 +217,11 @@ namespace SoundSynchro.Server.Controllers
         }
 
         [HttpPost]
-        public ActionResult APIKeyManagementUpdate(string deezerKey)
+        public ActionResult APIKeyManagementUpdate(string deezerKey, string youtubeKey, string soundcloudKey)
         {
             APIKeyManager.SetValue(MediaType.Deezer, deezerKey);
+            APIKeyManager.SetValue(MediaType.Youtube, youtubeKey);
+            APIKeyManager.SetValue(MediaType.SoundCloud, soundcloudKey);
             return RedirectToAction("Index");
         }
 
@@ -228,12 +230,14 @@ namespace SoundSynchro.Server.Controllers
             return "<script src=\"http://e-cdn-files.deezer.com/js/min/dz.js\"></script>";
         }
 
-        public string RadioContent()
+        public string RadioContent(string clientId)
         {
+            RadioManager.Current.SetActiveClient(clientId, DateTime.Now);
             MusicCollection musics = RadioManager.Current.musics;
             StringBuilder result = new StringBuilder();
 
             result.Append("{");
+            result.Append("\"currentClientsNumber\":\"" + RadioManager.Current.ActiveClientsNumber + "\",");
             result.Append("\"currentTime\":\"" + RadioManager.Current.CurrentTime + "\",");
             result.Append("\"currentMusicId\":\"" + RadioManager.Current.CurrentMusicId + "\",");
             result.Append("\"content\": [");
@@ -278,6 +282,31 @@ namespace SoundSynchro.Server.Controllers
         {
             RadioManager.Current.CurrentTime = time;
             return true;
+        }
+
+        public string SearchEnginePush(string type, string id, string title, string thumbnail)
+        {
+            Music music = Music.LoadByFile(id);
+            if (music == null)
+            {
+                music = new Music();
+                music.type = (MediaType)Enum.Parse(typeof(MediaType), type);
+                music.title = title;
+                music.file = id;
+                music.thumbnail = thumbnail;
+                music.Save();
+            }
+
+            StringBuilder result = new StringBuilder();
+            result.Append("{");
+            result.Append(" \"id\":\"" + music.id + "\",");
+            result.Append(" \"title\":\"" + music.title + "\",");
+            result.Append(" \"audio\":\"" + music.AudioUrl + "\",");
+            result.Append(" \"thumbnail\":\"" + music.ThumbnailUrl + "\",");
+            result.Append(" \"type\":\"" + music.type + "\"");
+            result.Append("}");
+
+            return result.ToString();
         }
     }
 }

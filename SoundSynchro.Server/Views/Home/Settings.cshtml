@@ -2,7 +2,17 @@
     ViewBag.Title = "Settings";
 }
 
-<h2>Settings</h2>
+<div class="box2-header">
+    <h1>
+        Settings
+    </h1>
+    <div class="search-box">
+        <form id="searchbox" action="">
+            <input id="submit" type="submit" class="submit" value="Search">
+            <input id="search" type="text" placeholder="Type here">
+        </form>
+    </div>
+</div>
 <hr />
 @using (Html.BeginForm("SettingsManagementUpdate", "Home", FormMethod.Post, new { @class = "form", enctype = "multipart/form-data" }))
 {
@@ -20,6 +30,13 @@
         Deezer API Key
         <input type="text" name="deezerKey" id="deezerKey" value="@SoundSynchro.Web.APIKeyManager.GetValue(SoundSynchro.MediaType.Deezer)" />
     </label>
-
+    <label>
+        Youtube API Key
+        <input type="text" name="youtubeKey" id="youtubeKey" value="@SoundSynchro.Web.APIKeyManager.GetValue(SoundSynchro.MediaType.Youtube)" />
+    </label>
+    <label>
+        SoundCloud API Key
+        <input type="text" name="soundcloudKey" id="soundcloudKey" value="@SoundSynchro.Web.APIKeyManager.GetValue(SoundSynchro.MediaType.SoundCloud)" />
+    </label>
     <input type="submit" value="Update" class="button" />
 }

@@ -136,6 +136,27 @@
     <Content Include="Content\foundation.css" />
     <Content Include="Content\foundation.min.css" />
     <Content Include="Content\reset.css" />
+    <Content Include="img\favicon\android-chrome-36x36.png" />
+    <Content Include="img\favicon\android-chrome-48x48.png" />
+    <Content Include="img\favicon\apple-touch-icon-114x114.png" />
+    <Content Include="img\favicon\apple-touch-icon-120x120.png" />
+    <Content Include="img\favicon\apple-touch-icon-144x144.png" />
+    <Content Include="img\favicon\apple-touch-icon-152x152.png" />
+    <Content Include="img\favicon\apple-touch-icon-180x180.png" />
+    <Content Include="img\favicon\apple-touch-icon-57x57.png" />
+    <Content Include="img\favicon\apple-touch-icon-60x60.png" />
+    <Content Include="img\favicon\apple-touch-icon-72x72.png" />
+    <Content Include="img\favicon\apple-touch-icon-76x76.png" />
+    <Content Include="img\favicon\apple-touch-icon-precomposed.png" />
+    <Content Include="img\favicon\apple-touch-icon.png" />
+    <Content Include="img\favicon\browserconfig.xml" />
+    <Content Include="img\favicon\favicon-16x16.png" />
+    <Content Include="img\favicon\favicon-32x32.png" />
+    <Content Include="img\favicon\favicon.ico" />
+    <Content Include="img\favicon\mstile-150x150.png" />
+    <Content Include="img\favicon\mstile-310x150.png" />
+    <Content Include="img\favicon\mstile-70x70.png" />
+    <Content Include="img\favicon\safari-pinned-tab.svg" />
     <Content Include="img\logo_soundsynchro.png" />
     <Content Include="img\logo_soundsynchro.svg" />
     <Content Include="Content\styles.css" />
@@ -148,6 +169,7 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="img\sound_synchro_thumbnail.png" />
     <Content Include="Scripts\foundation\foundation.js" />
     <Content Include="Scripts\foundation\foundation.min.js">
       <DependentUpon>foundation.js</DependentUpon>
@@ -164,14 +186,17 @@
     <Content Include="Scripts\foundation\foundation.min.js.map">
       <DependentUpon>foundation.min.js</DependentUpon>
     </Content>
+    <Content Include="img\favicon\manifest.json" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\soundsynchro\handlebars.js" />
     <Content Include="Scripts\soundsynchro\ui.js" />
     <Content Include="Scripts\soundsynchro\init.js" />
+    <Content Include="Scripts\soundsynchro\typeahead.jquery.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

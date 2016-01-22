@@ -101,3 +101,30 @@ ul {
     border-radius: 10px;
     border: 2px solid white;
 }
+
+.twitter-typeahead {
+    float: right;
+    width: 50%;
+}
+
+.tt-dataset {
+    background-color: white;
+    padding: 4px 0px;
+}
+
+.tt-suggestion {
+    padding: 0 4px;
+}
+
+    .tt-suggestion:hover {
+        background-color: #FF6D10;
+        color: white;
+    }
+
+#dropper {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
