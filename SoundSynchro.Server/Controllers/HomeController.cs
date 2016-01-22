@@ -287,6 +287,7 @@ namespace SoundSynchro.Server.Controllers
             Music music = Music.LoadByFile(id);
             if (music == null)
             {
+                music = new Music();
                 music.type = (MediaType)Enum.Parse(typeof(MediaType), type);
                 music.title = title;
                 music.file = id;
