@@ -258,6 +258,7 @@ var _playerRadioWorkerIsProcessing = false;
 function playerRadio() {
     _playerRadioModeEnabled = ($('#player-radio').find('.fa-microphone-slash').length > 0);
 
+    $('#player-radio-clients').text('');
     if (_playerRadioModeEnabled) {
         // radio on
 
@@ -283,9 +284,12 @@ function playerRadioRefresh() {
     if (!_playerRadioWorkerIsProcessing) {
         _playerRadioWorkerIsProcessing = true;
         // LOAD PLAYLIST
-        $.get(_RadioContentAction, function (data) {
+        $.get(_RadioContentAction + "?clientId=" + _clientId, function (data) {
             var radio = JSON.parse(data);
             var musics = radio.content;
+
+            // CLIENTS NUMBERR
+            $('#player-radio-clients').text(radio.currentClientsNumber);
 
             // REFRESH PLAYLIST
             _currentQueue = musics; // ONLY IF DIFFERENT !

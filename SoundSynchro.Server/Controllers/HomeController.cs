@@ -230,12 +230,14 @@ namespace SoundSynchro.Server.Controllers
             return "<script src=\"http://e-cdn-files.deezer.com/js/min/dz.js\"></script>";
         }
 
-        public string RadioContent()
+        public string RadioContent(string clientId)
         {
+            RadioManager.Current.SetActiveClient(clientId, DateTime.Now);
             MusicCollection musics = RadioManager.Current.musics;
             StringBuilder result = new StringBuilder();
 
             result.Append("{");
+            result.Append("\"currentClientsNumber\":\"" + RadioManager.Current.ActiveClientsNumber + "\",");
             result.Append("\"currentTime\":\"" + RadioManager.Current.CurrentTime + "\",");
             result.Append("\"currentMusicId\":\"" + RadioManager.Current.CurrentMusicId + "\",");
             result.Append("\"content\": [");
