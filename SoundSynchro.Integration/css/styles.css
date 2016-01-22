@@ -96,6 +96,7 @@ body {
         .box2-container .box2-header h1 {
             float: left;
             display: inline-block;
+            margin: 0;
             background-color: #ffffff;
             font-size: 24px;
             line-height: 60px;
@@ -107,6 +108,7 @@ body {
             margin: 6px 0;
             padding: 6px 12px;
             border: 1px solid #f1f1f1;
+            box-shadow: none;
             height: 48px;
         }
 
@@ -131,208 +133,213 @@ body {
                 }
 
 
-    .box2-container ul li .music-card {
+    .box2-container ul {
         float: left;
-        position: relative;
-        height: 48px;
         width: 100%;
-        transition: all 0.3s ease;
     }
 
-        .box2-container ul li .music-card:hover {
-            background-color: #FF6D10;
-        }
-
-        .box2-container ul li .music-card .img-container {
+        .box2-container ul li .music-card {
+            float: left;
             position: relative;
-            float: left;
-            background-color: #1c1c1c;
             height: 48px;
-            width: 48px;
+            width: 100%;
+            transition: all 0.3s ease;
         }
 
-            .box2-container ul li .music-card .img-container .fa {
-                font-size: 28px;
-                position: absolute;
-                line-height: 48px;
-                text-align: center;
-                top: 0;
-                left: 50%;
-                margin-left: -12px;
-                color: #FF6D10;
-                display: none;
-            }
-
-        .box2-container ul li .music-card:hover .img-container .fa {
-            display: block;
-        }
-
-
-        .box2-container ul li .music-card .img-container img {
-            float: left;
-            height: 48px;
-        }
-
-        .box2-container ul li .music-card:hover .img-container img {
-            opacity: 0.2;
-        }
-
-        .box2-container ul li .music-card .informations {
-            float: left;
-            margin: 0 0 0 12px;
-            font-size: 13px;
-            line-height: 48px;
-            color: #1c1c1c;
-        }
-
-        .box2-container ul li .music-card:hover .informations {
-            color: #ffffff;
-        }
-
-        .box2-container ul li .music-card .informations .artist-name {
-            text-transform: uppercase;
-        }
-
-
-    .box2-container ul li .actions {
-        position: absolute;
-        color: #ffffff;
-        top: 0px;
-        right: 24px;
-    }
-
-        .box2-container ul li .actions a {
-            float: right;
-            display: inline-block;
-            margin: 12px 6px;
-            width: 24px;
-            height: 24px;
-            line-height: 25px;
-            border-radius: 50%;
-            background-color: #1c1c1c;
-            color: #ffffff;
-            text-align: center;
-        }
-
-            .box2-container ul li .actions a:hover {
+            .box2-container ul li .music-card:hover {
                 background-color: #FF6D10;
             }
 
-
-    /* #region PLAYLISTS */
-    .box2-container ul li.playlist-card {
-        float: left;
-        margin: 2% 0 0 2%;
-        width: 17.6%;
-        /*border: 1px solid #ccc;*/
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-    }
-
-        .box2-container ul li.playlist-card .playlist-img-container {
-            float: left;
-            position: relative;
-            background-color: #1c1c1c;
-            width: 100%;
-        }
-
-            .box2-container ul li.playlist-card .playlist-img-container img {
+            .box2-container ul li .music-card .img-container {
+                position: relative;
                 float: left;
-                width: 100%;
-                opacity: 1;
-                transition: opacity 0.3s ease;
+                background-color: #1c1c1c;
+                height: 48px;
+                width: 48px;
             }
 
-        .box2-container ul li.playlist-card:hover .playlist-img-container img {
-            opacity: 0.3;
-        }
+                .box2-container ul li .music-card .img-container .fa {
+                    font-size: 28px;
+                    position: absolute;
+                    line-height: 48px;
+                    text-align: center;
+                    top: 0;
+                    left: 50%;
+                    margin-left: -12px;
+                    color: #FF6D10;
+                    display: none;
+                }
 
-        .box2-container ul li.playlist-card .playlist-img-container .playlist-actions {
+            .box2-container ul li .music-card:hover .img-container .fa {
+                display: block;
+            }
+
+
+            .box2-container ul li .music-card .img-container img {
+                float: left;
+                height: 48px;
+            }
+
+            .box2-container ul li .music-card:hover .img-container img {
+                opacity: 0.2;
+            }
+
+            .box2-container ul li .music-card .informations {
+                float: left;
+                margin: 0 0 0 12px;
+                font-size: 13px;
+                line-height: 48px;
+                color: #1c1c1c;
+            }
+
+            .box2-container ul li .music-card:hover .informations {
+                color: #ffffff;
+            }
+
+            .box2-container ul li .music-card .informations .artist-name {
+                text-transform: uppercase;
+            }
+
+
+        .box2-container ul li .actions {
             position: absolute;
-            margin-left: -54px;
             color: #ffffff;
-            top: 50%;
-            left: 50%;
-            visibility: hidden;
-            opacity: 0;
-            transition: all 0.3s ease;
-            margin-top: -12px;
+            top: 0px;
+            right: 24px;
         }
 
-            .box2-container ul li.playlist-card .playlist-img-container .playlist-actions a {
+            .box2-container ul li .actions a {
                 float: right;
                 display: inline-block;
-                margin: 0 6px;
+                margin: 12px 6px;
                 width: 24px;
                 height: 24px;
                 line-height: 25px;
                 border-radius: 50%;
-                background-color: #ffffff;
-                color: #FF6D10;
+                background-color: #1c1c1c;
+                color: #ffffff;
                 text-align: center;
             }
 
-                .box2-container ul li.playlist-card .playlist-img-container .playlist-actions a:hover {
+                .box2-container ul li .actions a:hover {
                     background-color: #FF6D10;
-                    color: #ffffff;
                 }
 
 
-
-
-        .box2-container ul li.playlist-card:hover .playlist-img-container .playlist-actions {
-            visibility: visible;
-            opacity: 1;
-        }
-
-        .box2-container ul li.playlist-card .playlist-informations {
+        /* #region PLAYLISTS */
+        .box2-container ul li.playlist-card {
             float: left;
-            background-color: #ffffff;
-            width: 100%;
+            margin: 2% 0 0 2%;
+            width: 17.6%;
+            /*border: 1px solid #ccc;*/
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
         }
 
-            .box2-container ul li.playlist-card .playlist-informations .playlist-playing {
-                display: none;
+            .box2-container ul li.playlist-card .playlist-img-container {
+                float: left;
+                position: relative;
+                background-color: #1c1c1c;
+                width: 100%;
             }
 
-                .box2-container ul li.playlist-card .playlist-informations .playlist-playing a {
+                .box2-container ul li.playlist-card .playlist-img-container img {
                     float: left;
-                    width: 48px;
-                    height: 48px;
-                    line-height: 48px;
-                    background-color: #f9f9f9;
+                    width: 100%;
+                    opacity: 1;
+                    transition: opacity 0.3s ease;
+                }
+
+            .box2-container ul li.playlist-card:hover .playlist-img-container img {
+                opacity: 0.3;
+            }
+
+            .box2-container ul li.playlist-card .playlist-img-container .playlist-actions {
+                position: absolute;
+                margin-left: -54px;
+                color: #ffffff;
+                top: 50%;
+                left: 50%;
+                visibility: hidden;
+                opacity: 0;
+                transition: all 0.3s ease;
+                margin-top: -12px;
+            }
+
+                .box2-container ul li.playlist-card .playlist-img-container .playlist-actions a {
+                    float: right;
+                    display: inline-block;
+                    margin: 0 6px;
+                    width: 24px;
+                    height: 24px;
+                    line-height: 25px;
+                    border-radius: 50%;
+                    background-color: #ffffff;
                     color: #FF6D10;
                     text-align: center;
-                    display: block;
-                    font-size: 24px;
                 }
 
-            .box2-container ul li.playlist-card .playlist-informations .playlist-name {
-                display: block;
-                padding: 0 12px;
-                font-size: 15px;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-                overflow: hidden;
-                line-height: 48px;
+                    .box2-container ul li.playlist-card .playlist-img-container .playlist-actions a:hover {
+                        background-color: #FF6D10;
+                        color: #ffffff;
+                    }
+
+
+
+
+            .box2-container ul li.playlist-card:hover .playlist-img-container .playlist-actions {
+                visibility: visible;
+                opacity: 1;
             }
 
-        .box2-container ul li.playlist-card.active .playlist-informations .playlist-playing {
-            display: block;
-        }
+            .box2-container ul li.playlist-card .playlist-informations {
+                float: left;
+                background-color: #ffffff;
+                width: 100%;
+            }
 
-        .box2-container ul li.playlist-card.active .playlist-img-container img {
-            opacity: 0.2;
-        }
+                .box2-container ul li.playlist-card .playlist-informations .playlist-playing {
+                    display: none;
+                }
 
-        .box2-container ul li.playlist-card.active .playlist-informations {
-            background-color: #FF6D10;
-            color: #ffffff;
-        }
+                    .box2-container ul li.playlist-card .playlist-informations .playlist-playing a {
+                        float: left;
+                        width: 48px;
+                        height: 48px;
+                        line-height: 48px;
+                        background-color: #f9f9f9;
+                        color: #FF6D10;
+                        text-align: center;
+                        display: block;
+                        font-size: 24px;
+                    }
 
-        .box2-container ul li.playlist-card.active .playlist-img-container .playlist-actions {
-            visibility: visible;
-            opacity: 1;
-        }
+                .box2-container ul li.playlist-card .playlist-informations .playlist-name {
+                    display: block;
+                    padding: 0 12px;
+                    font-size: 15px;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    line-height: 48px;
+                }
+
+            .box2-container ul li.playlist-card.active .playlist-informations .playlist-playing {
+                display: block;
+            }
+
+            .box2-container ul li.playlist-card.active .playlist-img-container img {
+                opacity: 0.2;
+            }
+
+            .box2-container ul li.playlist-card.active .playlist-informations {
+                background-color: #FF6D10;
+                color: #ffffff;
+            }
+
+            .box2-container ul li.playlist-card.active .playlist-img-container .playlist-actions {
+                visibility: visible;
+                opacity: 1;
+            }
 
 /* #endregion PLAYLISTS */
 
@@ -359,7 +366,7 @@ body {
 .player-preview {
     width: 100%;
     height: 204px;
-    background-color: indianred;
+    background-color: #1c1c1c;
 }
 
 .player-audio {
@@ -467,7 +474,7 @@ body {
 
 
 .playlist {
-    background-color: wheat;
+    background-color: #ffffff;
     height: calc(100% - 348px);
     overflow-y: scroll;
 }
@@ -593,3 +600,22 @@ body {
 .slider:hover .slider-handle {
     opacity: 1;
 }
+
+
+
+
+/* #region Autocomplete SearchBox */
+.tt-menu {
+    width: 100%;
+    -moz-box-shadow: 0px 0px 10px 0px #1c1c1c;
+    -webkit-box-shadow: 0px 0px 10px 0px #1c1c1c;
+    -o-box-shadow: 0px 0px 10px 0px #1c1c1c;
+    box-shadow: 0px 0px 10px 0px #1c1c1c;
+    filter: progid:DXImageTransform.Microsoft.Shadow(color=#1c1c1c, Direction=NaN, Strength=10);
+}
+
+.tt-suggestion {
+    padding: 4px 0;
+    cursor: pointer;
+}
+/* #endregion Autocomplete SearchBox */
