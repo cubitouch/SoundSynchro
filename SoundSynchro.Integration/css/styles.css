@@ -156,6 +156,9 @@ body {
                 background-color: #1c1c1c;
                 height: 48px;
                 width: 48px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
 
                 .box2-container ul li .music-card .img-container .fa {
@@ -177,7 +180,7 @@ body {
 
             .box2-container ul li .music-card .img-container img {
                 float: left;
-                height: 48px;
+                /*height: 48px;*/
             }
 
             .box2-container ul li .music-card:hover .img-container img {
@@ -615,7 +618,37 @@ body {
 }
 
 .tt-suggestion {
-    padding: 4px 0;
+    padding: 4px;
     cursor: pointer;
 }
+
+.tt-dataset {
+    background-color: white;
+    padding: 4px 0px;
+}
+
+.tt-suggestion {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+    .tt-suggestion:hover {
+        background-color: #FF6D10;
+        color: white;
+    }
+
+    .tt-suggestion img {
+        max-width: 40px;
+        margin-right: 4px;
+    }
 /* #endregion Autocomplete SearchBox */
+
+.music-item {
+    float: left;
+    position: relative;
+    /*margin: 0 0 6px 0;*/
+    /*padding: 0 24px;*/
+    height: 48px;
+    width: 100%;
+}

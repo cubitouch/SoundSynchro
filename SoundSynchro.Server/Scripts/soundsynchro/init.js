@@ -17,14 +17,53 @@ $(function () {
         if ($('#dropper').length == 0) {
             $('body').append('<textarea id="dropper"></textarea>');
             $('#dropper').change(function () {
-                console.log("drop", $('#dropper').val());
+                var link = $('#dropper').val();
                 $('#dropper').remove();
+                pushDragNDrop(link);
             });
         }
     }, false);
     document.addEventListener("drop", function (event) {
         setTimeout(function () { $('#dropper').trigger("change"); }, 200);
     }, false);
+
+    function pushDragNDrop(link) {
+        //console.log('pushDragNDrop', link);
+        var platform = link.split('/')[2];
+        var id = link;
+
+        switch (platform) {
+            case "www.youtube.com":
+                var query = link.split('?')[1].split('&');
+                //console.log(query.length);
+                for (var i = 0; i < query.length; i++) {
+                    var keyValue = query[i].split('=');
+                    //console.log(keyValue, keyValue[0] == "v");
+                    if (keyValue[0] == "v") {
+                        id = keyValue[1];
+                    }
+                }
+                $.get('https://www.googleapis.com/youtube/v3/videos?part=id,snippet&id=' + id + '&key=' + _YoutubeAPIKey, function (data) {
+                    pushMusicItem({
+                        type: "Youtube",
+                        id: data.items[0].id,
+                        title: data.items[0].snippet.title,
+                        thumbnail: data.items[0].snippet.thumbnails.default.url
+                    });
+                });
+                break;
+            case "soundcloud.com":
+                $.get('http://api.soundcloud.com/resolve?url=' + link + '&client_id=' + _SoundCloudAPIKey, function (data) {
+                    pushMusicItem({
+                        type: "SoundCloud",
+                        id: data.permalink_url,
+                        title: data.title,
+                        thumbnail: data.artwork_url
+                    });
+                });
+                break;
+        }
+    }
 
     $('.music-item .img-container img').each(function (i, el) {
         if ($(this).attr('src') == '') {
@@ -285,22 +324,28 @@ function initAutocompleteSearchEngine() {
         source: autocompleteRequest,
         limit: 50,
         templates: {
-            suggestion: Handlebars.compile("<div>{{title}}</div>")
+            suggestion: Handlebars.compile("<div><img src=\"{{thumbnail}}\">{{title}}</div>")
         }
     }).bind('typeahead:select', function (ev, suggestion) {
         //console.log('Selection: ', suggestion);
-        $.post(_SearchEnginePushAction, suggestion, function (data) {
-            var music = JSON.parse(data);
-            if (_playerRadioModeEnabled) {
-                $.post(_RadioContentAddAction, { id: music.id }, function (html) {
-                    // Do someting ?
-                });
-            } else {
-                addToQueue(music.id, music.title, music.audio, music.thumbnail, music.type)
-                playQueue(music.id);
-            }
-        });
+        pushMusicItem(suggestion);
         $('#search').typeahead('val', '');
+    });
+}
+
+
+function pushMusicItem(item) {
+    console.log('pushMusicItem', item);
+    $.post(_SearchEnginePushAction, item, function (data) {
+        var music = JSON.parse(data);
+        if (_playerRadioModeEnabled) {
+            $.post(_RadioContentAddAction, { id: music.id }, function (html) {
+                // Do someting ?
+            });
+        } else {
+            addToQueue(music.id, music.title, music.audio, music.thumbnail, music.type)
+            playQueue(music.id);
+        }
     });
 }
 
@@ -330,7 +375,7 @@ function autocompleteRequest(query, syncResults, asyncResults) {
                 type: "SoundCloud",
                 id: data[i].permalink_url,
                 title: data[i].title,
-                thumbnail: data[i].artwork_url
+                thumbnail: (data[i].artwork_url ? data[i].artwork_url : "/img/sound_synchro_thumbnail.png")
             });
         }
         //console.log('suggestions SOUNDCLOUD', suggestions);
