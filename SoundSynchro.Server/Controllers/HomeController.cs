@@ -290,6 +290,7 @@ namespace SoundSynchro.Server.Controllers
             if (music == null)
             {
                 music = new Music();
+                music.date = DateTime.Now;
                 music.type = (MediaType)Enum.Parse(typeof(MediaType), type);
                 music.title = title;
                 music.file = id;

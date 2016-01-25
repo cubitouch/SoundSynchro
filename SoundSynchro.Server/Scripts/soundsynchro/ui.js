@@ -1,5 +1,4 @@
-﻿var _defaultThumbnailUrl = "/img/sound_synchro_thumbnail.png";
-// player
+﻿// player
 
 function formatTime(time) {
     time = Math.floor(time);
@@ -31,34 +30,42 @@ function setDuration(current) {
             break;
         case "Youtube":
 
-            var nextTime = (playerYoutube.getDuration() * current / 100);
-            var wasPlaying = (_lastPlayerYoutubeState == YT.PlayerState.PLAYING);
-            playerYoutube.pauseVideo();
-            playerYoutube.seekTo(nextTime, true);
-            if (nextTime != playerYoutube.duration && wasPlaying) {
-                playerYoutube.playVideo();
+            if (!_playerYoutubeInError) {
+                var nextTime = (playerYoutube.getDuration() * current / 100);
+                var wasPlaying = (_lastPlayerYoutubeState == YT.PlayerState.PLAYING);
+                playerYoutube.pauseVideo();
+                playerYoutube.seekTo(nextTime, true);
+                if (nextTime != playerYoutube.duration && wasPlaying) {
+                    playerYoutube.playVideo();
+                }
             }
 
             break;
         case "SoundCloud":
-            playerSoundCloud.getDuration(function (duration) {
-                playerSoundCloud.isPaused(function (wasPaused) {
-                    var nextTime = (duration / 1000 * current / 100);
-                    playerSoundCloud.pause();
-                    playerSoundCloud.seekTo(nextTime * 1000, true);
-                    if (nextTime != duration && !wasPaused) {
-                        playerSoundCloud.play();
-                    }
+
+            if (!_playerSoundCloudInError) {
+                playerSoundCloud.getDuration(function (duration) {
+                    playerSoundCloud.isPaused(function (wasPaused) {
+                        var nextTime = (duration / 1000 * current / 100);
+                        playerSoundCloud.pause();
+                        playerSoundCloud.seekTo(nextTime * 1000, true);
+                        if (nextTime != duration && !wasPaused) {
+                            playerSoundCloud.play();
+                        }
+                    });
                 });
-            });
+            }
 
             break;
         case "Deezer":
-            var wasPlaying = (playerDeezer.isPlaying);
-            playerDeezer.pause();
-            playerDeezer.seek(current, true);
-            if (nextTime != playerDeezer.getCurrentTrack().duration && wasPlaying) {
-                playerDeezer.play();
+
+            if (!_playerDeezerInError) {
+                var wasPlaying = (playerDeezer.isPlaying);
+                playerDeezer.pause();
+                playerDeezer.seek(current, true);
+                if (nextTime != playerDeezer.getCurrentTrack().duration && wasPlaying) {
+                    playerDeezer.play();
+                }
             }
 
             break;
@@ -77,10 +84,16 @@ function playerPlayMedia(currentItem) {
     }
 
     if (currentItem.type != _currentType) {
-        playerYoutube.stopVideo();
-        playerSoundCloud.pause();
+        if (!_playerYoutubeInError) {
+            playerYoutube.stopVideo();
+        }
+        if (!_playerSoundCloudInError) {
+            playerSoundCloud.pause();
+        }
         playerHTML5.load();
-        playerDeezer.pause();
+        if (!_playerDeezerInError) {
+            playerDeezer.pause();
+        }
     }
 
     _currentId = currentItem.id;
@@ -114,46 +127,58 @@ function playerPlayMedia(currentItem) {
             $('#player-file').removeClass('hide');
             break;
         case 'Youtube':
-            var needReload = (_lastPlayerYoutubeState == YT.PlayerState.PAUSED && needReloadGlobal);
-            if (needReload) {
-                playerYoutube.playVideo();
-            } else {
-                playerYoutube.loadVideoById(currentItem.audio);
+
+            if (!_playerYoutubeInError) {
+                var needReload = (_lastPlayerYoutubeState == YT.PlayerState.PAUSED && needReloadGlobal);
+                if (needReload) {
+                    playerYoutube.playVideo();
+                } else {
+                    playerYoutube.loadVideoById(currentItem.audio);
+                }
+                $('#player-youtube').removeClass('hide');
             }
-            $('#player-youtube').removeClass('hide');
+
             break;
         case 'SoundCloud':
-            var needReload = (playerSoundCloud.isPaused() && needReloadGlobal);
-            if (needReload) {
-                playerSoundCloud.play();
-            } else {
-                playerSoundCloud.load(currentItem.audio, {
-                    buying: false,
-                    liking: false,
-                    download: false,
-                    sharing: false,
-                    show_artwork: false,
-                    show_comments: false,
-                    show_playcount: false,
-                    show_user: false,
-                    hide_related: false,
-                    visual: true,
-                    start_track: 0,
-                    auto_play: true
-                });
+
+            if (!_playerSoundCloudInError) {
+                var needReload = (playerSoundCloud.isPaused() && needReloadGlobal);
+                if (needReload) {
+                    playerSoundCloud.play();
+                } else {
+                    playerSoundCloud.load(currentItem.audio, {
+                        buying: false,
+                        liking: false,
+                        download: false,
+                        sharing: false,
+                        show_artwork: false,
+                        show_comments: false,
+                        show_playcount: false,
+                        show_user: false,
+                        hide_related: false,
+                        visual: true,
+                        start_track: 0,
+                        auto_play: true
+                    });
+                }
+                $('#player-soundcloud').removeClass('hide');
             }
-            $('#player-soundcloud').removeClass('hide');
+
             break;
         case 'Deezer':
-            var needReload = (!playerDeezer.isPlaying() && needReloadGlobal);
-            if (needReload) {
-                playerDeezer.play();
-            } else {
-                playerDeezer.playTracks([currentItem.audio], function (e) {
-                    //console.log(e);
-                });
+
+            if (!_playerDeezerInError) {
+                var needReload = (!playerDeezer.isPlaying() && needReloadGlobal);
+                if (needReload) {
+                    playerDeezer.play();
+                } else {
+                    playerDeezer.playTracks([currentItem.audio], function (e) {
+                        //console.log(e);
+                    });
+                }
+                $('#player-deezer').removeClass('hide');
             }
-            $('#player-deezer').removeClass('hide');
+
             break;
     }
     playerPlay();
@@ -173,11 +198,17 @@ function playerPlay(forcePause) {
     if (needPause) {
         // pause
         playerHTML5.pause();
-        if (playerYoutube.pauseVideo != undefined) {
-            playerYoutube.pauseVideo();
+        if (!_playerYoutubeInError) {
+            if (playerYoutube.pauseVideo != undefined) {
+                playerYoutube.pauseVideo();
+            }
         }
-        playerSoundCloud.pause();
-        playerDeezer.pause();
+        if (!_playerSoundCloudInError) {
+            playerSoundCloud.pause();
+        }
+        if (!_playerDeezerInError) {
+            playerDeezer.pause();
+        }
     } else {
         // play
         switch (_currentType) {
@@ -185,13 +216,19 @@ function playerPlay(forcePause) {
                 playerHTML5.play();
                 break;
             case "Youtube":
-                playerYoutube.playVideo();
+                if (!_playerYoutubeInError) {
+                    playerYoutube.playVideo();
+                }
                 break;
             case "SoundCloud":
-                playerSoundCloud.play();
+                if (!_playerSoundCloudInError) {
+                    playerSoundCloud.play();
+                }
                 break;
             case "Deezer":
-                playerDeezer.play();
+                if (!_playerDeezerInError) {
+                    playerDeezer.play();
+                }
                 break;
         }
     }
@@ -220,25 +257,37 @@ function playerSoundCloudVolumeRefresh() {
     }
 }
 function playerSoundCloudUpdateDurations() {
-    playerSoundCloud.getPosition(function (positionEvent) {
-        playerSoundCloud.getDuration(function (durationEvent) {
-            updateDurations(positionEvent / 1000, durationEvent / 1000);
+    if (!_playerSoundCloudInError) {
+        playerSoundCloud.getPosition(function (positionEvent) {
+            playerSoundCloud.getDuration(function (durationEvent) {
+                updateDurations(positionEvent / 1000, durationEvent / 1000);
+            });
         });
-    });
+    }
 }
 function playerVolume() {
     var needMute = ($('#player-volume').find('.fa-volume-up').length > 0);
 
     playerHTML5.muted = needMute;
-    playerDeezer.setMute(needMute);
+    if (!_playerDeezerInError) {
+        playerDeezer.setMute(needMute);
+    }
     if (needMute) {
         // mute
-        playerYoutube.mute();
-        playerSoundCloud.setVolume(0);
+        if (!_playerYoutubeInError) {
+            playerYoutube.mute();
+        }
+        if (!_playerSoundCloudInError) {
+            playerSoundCloud.setVolume(0);
+        }
     } else {
         // unmute
-        playerYoutube.unMute();
-        playerSoundCloud.setVolume(100);
+        if (!_playerYoutubeInError) {
+            playerYoutube.unMute();
+        }
+        if (!_playerSoundCloudInError) {
+            playerSoundCloud.setVolume(100);
+        }
     }
 
     if (needMute) {

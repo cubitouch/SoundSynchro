@@ -80,9 +80,8 @@ body {
 .box2-container {
     display: block;
     padding: 0;
-    overflow: auto;
+    overflow: hidden;
     height: 100vh;
-    overflow-x: hidden;
 }
 
     .box2-container .box2-header {
@@ -133,6 +132,11 @@ body {
                 }
 
 
+    .box2-container .music-container {
+        height: calc(100% - 60px);
+        overflow-y: scroll;
+    }
+
     .box2-container ul {
         float: left;
         width: 100%;
@@ -180,7 +184,7 @@ body {
 
             .box2-container ul li .music-card .img-container img {
                 float: left;
-                /*height: 48px;*/
+                width: 100%;
             }
 
             .box2-container ul li .music-card:hover .img-container img {
@@ -478,7 +482,7 @@ body {
 
 .playlist {
     background-color: #ffffff;
-    height: calc(100% - 348px);
+    height: calc(100% - 344px);
     overflow-y: scroll;
 }
 

@@ -25,6 +25,9 @@ namespace SoundSynchro.Server
                       "~/Scripts/soundsynchro/handlebars.js",
                       "~/Scripts/soundsynchro/typeahead.jquery.js",
                       "~/Scripts/soundsynchro/init.js",
+                      "~/Scripts/soundsynchro/init.youtube.js",
+                      "~/Scripts/soundsynchro/init.soundcloud.js",
+                      "~/Scripts/soundsynchro/init.deezer.js",
                       "~/Scripts/soundsynchro/ui.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

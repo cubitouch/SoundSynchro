@@ -1,4 +1,5 @@
-﻿var _clientId = guid();
+﻿var _defaultThumbnailUrl = "/img/sound_synchro_thumbnail.png";
+var _clientId = guid();
 /* http://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript */
 function guid() {
     function s4() {
@@ -185,132 +186,6 @@ $(function () {
 var playerSlider;
 var playerHTML5 = $('#player .audio')[0];
 
-// This code loads the IFrame Player API code asynchronously.
-var tag = document.createElement('script');
-tag.src = "https://www.youtube.com/iframe_api";
-var firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-var playerYoutube;
-function onYouTubeIframeAPIReady() {
-    playerYoutube = new YT.Player('player-youtube', {
-        height: '200',
-        width: '200',
-        playerVars: {
-            'autoplay': 1,
-            'controls': 0,
-            'disablekb': 1,
-            'fs': 0,
-            'iv_load_policy': 3,
-            'showinfo': 0,
-            'rel': 0
-        },
-        events: {
-            'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
-        }
-    });
-}
-
-// YOUTUBE
-var _playerYoutubeReady = false;
-function onPlayerReady(event) {
-    _playerYoutubeReady = true;
-    if (_lastPlayerYoutubeState == YT.PlayerState.PLAYING) {
-        updateDurations(playerYoutube.getCurrentTime(), playerYoutube.getDuration());
-    }
-    setTimeout(onPlayerReady, 500);
-}
-
-// 5. The API calls this function when the player's state changes.
-//    The function indicates that when playing a video (state=1),
-//    the player should play for six seconds and then stop.
-var _lastPlayerYoutubeState;
-function onPlayerStateChange(event) {
-    _lastPlayerYoutubeState = event.data;
-    switch (event.data) {
-        case YT.PlayerState.ENDED:
-            playNext();
-            break;
-        case YT.PlayerState.PAUSED:
-            playerUIPlay(true);
-            break;
-        case YT.PlayerState.PLAYING:
-            playerUIPlay(false);
-            break;
-    }
-}
-
-// SOUNDCLOUD
-
-var _playerSoundCloudReady = false;
-var playerSoundCloud;
-$(function () {
-    playerSoundCloud = SC.Widget("player-soundcloud");
-    playerSoundCloud.bind(SC.Widget.Events.READY, function (e) {
-        _playerSoundCloudReady = true;
-
-        // INIT EVENT HANDLERS
-        playerSoundCloud.bind(SC.Widget.Events.PLAY, function (e) {
-            playerUIPlay(false);
-            playerSoundCloudVolumeRefresh();
-        });
-        playerSoundCloud.bind(SC.Widget.Events.PLAY_PROGRESS, function (e) {
-            playerSoundCloudUpdateDurations();
-        });
-        playerSoundCloud.bind(SC.Widget.Events.PAUSE, function (e) {
-            playerUIPlay(true);
-        });
-        playerSoundCloud.bind(SC.Widget.Events.SEEK, function (e) {
-            playerSoundCloudUpdateDurations();
-        });
-        playerSoundCloud.bind(SC.Widget.Events.FINISH, function (e) {
-            playNext();
-        });
-    });
-});
-
-// DEEZER
-
-var _playerDeezerReady = false;
-var playerDeezer;
-window.dzAsyncInit = function () {
-    DZ.init({
-        appId: _DeezerAPIKey,
-        channelUrl: '@Url.Action("DeezerChannel")',
-        player: {
-            container: 'player-deezer',
-            format: 'classic',
-            playlist: false,
-            onload: function (response) {
-                _playerDeezerReady = true;
-                playerDeezer = DZ.player;
-
-                // play, pause, position, end events
-                DZ.Event.subscribe('player_play', function (e) {
-                    playerUIPlay(false);
-                });
-                DZ.Event.subscribe('player_paused', function (e) {
-                    playerUIPlay(true);
-                });
-                DZ.Event.subscribe('player_position', function (e) {
-                    updateDurations(e[0], e[1]);
-                });
-                DZ.Event.subscribe('track_end', function (e) {
-                    playNext();
-                });
-            }
-        }
-    });
-};
-(function () {
-    var e = document.createElement('script');
-    e.src = 'http://e-cdn-files.deezer.com/js/min/dz.js';
-    e.async = true;
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(e, firstScriptTag);
-}());
-
 $(function () {
     initAutocompleteSearchEngine();
 });
@@ -332,7 +207,6 @@ function initAutocompleteSearchEngine() {
         $('#search').typeahead('val', '');
     });
 }
-
 
 function pushMusicItem(item) {
     console.log('pushMusicItem', item);
