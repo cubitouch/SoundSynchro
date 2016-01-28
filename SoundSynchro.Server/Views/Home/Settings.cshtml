@@ -40,3 +40,16 @@
     </label>
     <input type="submit" value="Update" class="button" />
 }
+<hr />
+@using (Html.BeginForm("VorlonJSManagementUpdate", "Home", FormMethod.Post, new { @class = "form", enctype = "multipart/form-data" }))
+{
+    <label>
+        VorlonJS server
+        <input type="text" name="vorlonJSServer" id="vorlonJSServer" value="@SoundSynchro.Web.VorlonJSManager.GetServer()" />
+    </label>
+    <label>
+        VorlonJS activation
+        <input type="checkbox" name="vorlonJSServerConfigured" id="vorlonJSServerConfigured" @(SoundSynchro.Web.VorlonJSManager.GetServerConfigured() ? "checked" : "") />
+    </label>
+    <input type="submit" value="Update" class="button" />
+}

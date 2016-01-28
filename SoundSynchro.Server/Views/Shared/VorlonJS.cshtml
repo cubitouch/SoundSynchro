@@ -1,0 +1,5 @@
+﻿@using SoundSynchro.Web
+@if (VorlonJSManager.GetServerConfigured())
+{
+    <script src="@VorlonJSManager.GetServer()/vorlon.js"></script>
+}

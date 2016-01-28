@@ -225,6 +225,14 @@ namespace SoundSynchro.Server.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public ActionResult VorlonJSManagementUpdate(string vorlonJSServer, string vorlonJSServerConfigured = "")
+        {
+            VorlonJSManager.SetServer(vorlonJSServer.Trim());
+            VorlonJSManager.SetServerConfigured((vorlonJSServerConfigured == "on" ? true : false));
+            return RedirectToAction("Index");
+        }
+
         public string DeezerChannel()
         {
             return "<script src=\"http://e-cdn-files.deezer.com/js/min/dz.js\"></script>";

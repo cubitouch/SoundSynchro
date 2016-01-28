@@ -30,7 +30,7 @@ function setDuration(current) {
             break;
         case "Youtube":
 
-            if (!_playerYoutubeInError) {
+            if (_playerYoutubeReady && !_playerYoutubeInError) {
                 var nextTime = (playerYoutube.getDuration() * current / 100);
                 var wasPlaying = (_lastPlayerYoutubeState == YT.PlayerState.PLAYING);
                 playerYoutube.pauseVideo();
@@ -43,7 +43,7 @@ function setDuration(current) {
             break;
         case "SoundCloud":
 
-            if (!_playerSoundCloudInError) {
+            if (_playerSoundCloudReady && !_playerSoundCloudInError) {
                 playerSoundCloud.getDuration(function (duration) {
                     playerSoundCloud.isPaused(function (wasPaused) {
                         var nextTime = (duration / 1000 * current / 100);
@@ -59,7 +59,7 @@ function setDuration(current) {
             break;
         case "Deezer":
 
-            if (!_playerDeezerInError) {
+            if (_playerDeezerReady && !_playerDeezerInError) {
                 var wasPlaying = (playerDeezer.isPlaying);
                 playerDeezer.pause();
                 playerDeezer.seek(current, true);
@@ -79,19 +79,21 @@ function updateDurations(begin, end) {
 }
 
 function playerPlayMedia(currentItem) {
-    if (!_playerYoutubeReady || !_playerSoundCloudReady || !_playerDeezerReady) {
+    if ((_playerYoutubeReady || _playerYoutubeInError) &&
+        (_playerSoundCloudReady || _playerSoundCloudInError) &&
+        (_playerDeezerReady || _playerDeezerInError)) {
         return false;
     }
 
     if (currentItem.type != _currentType) {
-        if (!_playerYoutubeInError) {
+        if (_playerYoutubeReady && !_playerYoutubeInError) {
             playerYoutube.stopVideo();
         }
-        if (!_playerSoundCloudInError) {
+        if (_playerSoundCloudReady && !_playerSoundCloudInError) {
             playerSoundCloud.pause();
         }
         playerHTML5.load();
-        if (!_playerDeezerInError) {
+        if (_playerDeezerReady && !_playerDeezerInError) {
             playerDeezer.pause();
         }
     }
@@ -128,7 +130,7 @@ function playerPlayMedia(currentItem) {
             break;
         case 'Youtube':
 
-            if (!_playerYoutubeInError) {
+            if (_playerYoutubeReady && !_playerYoutubeInError) {
                 var needReload = (_lastPlayerYoutubeState == YT.PlayerState.PAUSED && needReloadGlobal);
                 if (needReload) {
                     playerYoutube.playVideo();
@@ -141,7 +143,7 @@ function playerPlayMedia(currentItem) {
             break;
         case 'SoundCloud':
 
-            if (!_playerSoundCloudInError) {
+            if (_playerSoundCloudReady && !_playerSoundCloudInError) {
                 var needReload = (playerSoundCloud.isPaused() && needReloadGlobal);
                 if (needReload) {
                     playerSoundCloud.play();
@@ -167,7 +169,7 @@ function playerPlayMedia(currentItem) {
             break;
         case 'Deezer':
 
-            if (!_playerDeezerInError) {
+            if (_playerDeezerReady && !_playerDeezerInError) {
                 var needReload = (!playerDeezer.isPlaying() && needReloadGlobal);
                 if (needReload) {
                     playerDeezer.play();
@@ -198,15 +200,15 @@ function playerPlay(forcePause) {
     if (needPause) {
         // pause
         playerHTML5.pause();
-        if (!_playerYoutubeInError) {
+        if (_playerYoutubeReady && !_playerYoutubeInError) {
             if (playerYoutube.pauseVideo != undefined) {
                 playerYoutube.pauseVideo();
             }
         }
-        if (!_playerSoundCloudInError) {
+        if (_playerSoundCloudReady && !_playerSoundCloudInError) {
             playerSoundCloud.pause();
         }
-        if (!_playerDeezerInError) {
+        if (_playerDeezerReady && !_playerDeezerInError) {
             playerDeezer.pause();
         }
     } else {
@@ -216,17 +218,17 @@ function playerPlay(forcePause) {
                 playerHTML5.play();
                 break;
             case "Youtube":
-                if (!_playerYoutubeInError) {
+                if (_playerYoutubeReady && !_playerYoutubeInError) {
                     playerYoutube.playVideo();
                 }
                 break;
             case "SoundCloud":
-                if (!_playerSoundCloudInError) {
+                if (_playerSoundCloudReady && !_playerSoundCloudInError) {
                     playerSoundCloud.play();
                 }
                 break;
             case "Deezer":
-                if (!_playerDeezerInError) {
+                if (_playerDeezerReady && !_playerDeezerInError) {
                     playerDeezer.play();
                 }
                 break;
@@ -257,7 +259,7 @@ function playerSoundCloudVolumeRefresh() {
     }
 }
 function playerSoundCloudUpdateDurations() {
-    if (!_playerSoundCloudInError) {
+    if (_playerSoundCloudReady && !_playerSoundCloudInError) {
         playerSoundCloud.getPosition(function (positionEvent) {
             playerSoundCloud.getDuration(function (durationEvent) {
                 updateDurations(positionEvent / 1000, durationEvent / 1000);
@@ -269,23 +271,23 @@ function playerVolume() {
     var needMute = ($('#player-volume').find('.fa-volume-up').length > 0);
 
     playerHTML5.muted = needMute;
-    if (!_playerDeezerInError) {
+    if (!_playerDeezerReady && !_playerDeezerInError) {
         playerDeezer.setMute(needMute);
     }
     if (needMute) {
         // mute
-        if (!_playerYoutubeInError) {
+        if (_playerYoutubeReady && !_playerYoutubeInError) {
             playerYoutube.mute();
         }
-        if (!_playerSoundCloudInError) {
+        if (_playerSoundCloudReady && !_playerSoundCloudInError) {
             playerSoundCloud.setVolume(0);
         }
     } else {
         // unmute
-        if (!_playerYoutubeInError) {
+        if (_playerYoutubeReady && !_playerYoutubeInError) {
             playerYoutube.unMute();
         }
-        if (!_playerSoundCloudInError) {
+        if (_playerSoundCloudReady && !_playerSoundCloudInError) {
             playerSoundCloud.setVolume(100);
         }
     }

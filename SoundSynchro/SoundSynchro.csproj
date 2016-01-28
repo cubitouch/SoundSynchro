@@ -79,6 +79,7 @@
       <CodeFluentProducer>190edd35e7cabc482a4b350cecde9d17</CodeFluentProducer>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Web\VorlonJSManager.cs" />
     <Compile Include="Web\APIKeyManager.cs" />
     <Compile Include="Web\BitsServer.cs">
       <CodeFluentProducer>190edd35e7cabc482a4b350cecde9d17</CodeFluentProducer>
