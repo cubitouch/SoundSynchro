@@ -79,9 +79,9 @@ function updateDurations(begin, end) {
 }
 
 function playerPlayMedia(currentItem) {
-    if ((_playerYoutubeReady || _playerYoutubeInError) &&
+    if (!((_playerYoutubeReady || _playerYoutubeInError) &&
         (_playerSoundCloudReady || _playerSoundCloudInError) &&
-        (_playerDeezerReady || _playerDeezerInError)) {
+        (_playerDeezerReady || _playerDeezerInError))) {
         return false;
     }
 
